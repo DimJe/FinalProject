@@ -4,10 +4,10 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "user")
+@Entity
 data class User(
-    @ColumnInfo(name = "userNumber") var userNumber : String?,
-    @ColumnInfo(name = "passWord") var passWord : String?
+    @ColumnInfo(name = "userNumber") val userNumber : String,
+    @ColumnInfo(name = "passWord") val passWord : String
 ){
     @PrimaryKey(autoGenerate = true) var id : Int = 0
 }
