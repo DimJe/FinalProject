@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/82109/StudioProjects/FinalProject/app/src/main/res/layout/activity_main.xml" value="0.184375" />
+        <entry key="..\:/Users/82109/StudioProjects/FinalProject/app/src/main/res/layout/activity_task_view_with_cal.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/82109/StudioProjects/FinalProject/app/src/main/res/layout/list_item_day.xml" value="0.33" />
+        <entry key="..\:/Users/82109/StudioProjects/FinalProject/app/src/main/res/layout/list_item_month.xml" value="0.36614583333333334" />
       </map>
     </option>
   </component>
