@@ -1,5 +1,6 @@
 package org.techtown.finalproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -51,6 +52,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             Toast.makeText(this, "test-text", Toast.LENGTH_SHORT).show()
+            val intent = Intent(this,TaskViewWithCal::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 }
