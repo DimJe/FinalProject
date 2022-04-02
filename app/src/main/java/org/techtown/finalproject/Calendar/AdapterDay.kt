@@ -31,13 +31,13 @@ class AdapterDay(val tempMonth:Int, val dayList: MutableList<Date>,val taskList 
     inner class DayView(val layout: View): RecyclerView.ViewHolder(layout)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayView {
-        Log.d(TAG, "onCreateViewHolder: $tempMonth, ${dayList[15].month}")
+        //Log.d(TAG, "onCreateViewHolder: $tempMonth, ${dayList[15].month}")
         var view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_day, parent, false)
         return DayView(view)
     }
 
     override fun onBindViewHolder(holder: DayView, position: Int) {
-        Log.d(TAG, "onBindViewHolder: $position")
+        //Log.d(TAG, "onBindViewHolder: $position")
         scheduleList[0] = holder.layout.one
         scheduleList[1] = holder.layout.two
         scheduleList[2] = holder.layout.three
