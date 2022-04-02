@@ -6,10 +6,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item_month.view.*
+import org.techtown.finalproject.APIViewModel.Taskinfo
 import org.techtown.finalproject.R
 import java.util.*
 
-class AdapterMonth: RecyclerView.Adapter<AdapterMonth.MonthView>() {
+class AdapterMonth(val taskList : ArrayList<Taskinfo>): RecyclerView.Adapter<AdapterMonth.MonthView>() {
     val center = Int.MAX_VALUE / 2
     private var calendar = Calendar.getInstance()
 
@@ -37,7 +38,7 @@ class AdapterMonth: RecyclerView.Adapter<AdapterMonth.MonthView>() {
         }
 
         val dayListManager = GridLayoutManager(holder.layout.context, 7)
-        val dayListAdapter = AdapterDay(tempMonth, dayList)
+        val dayListAdapter = AdapterDay(tempMonth, dayList,taskList)
 
         holder.layout.item_month_day_list.apply {
             layoutManager = dayListManager

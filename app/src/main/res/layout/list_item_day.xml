@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="100dp"
     android:layout_marginTop="5dp"
-    android:gravity="right"
+    android:gravity="center"
     android:orientation="vertical"
     android:weightSum="8">
 
@@ -17,46 +17,52 @@
         android:textSize="16sp"
         android:textStyle="bold" />
     <View
+        android:id="@+id/one"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible"
-        android:background="#F44336"
+        android:background="#A4FF1100"
         />
     <View
+        android:id="@+id/two"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible"
-        android:background="#673AB7"
+        android:background="#AEFF8500"
         />
     <View
+        android:id="@+id/three"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible"
-        android:background="#00BCD4"
+        android:background="#B0FFEB3B"
         />
     <View
+        android:id="@+id/four"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible"
-        android:background="#4CAF50"
+        android:background="#B500FF0A"
         />
     <View
+        android:id="@+id/five"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible"
-        android:background="#CDDC39"
+        android:background="#B5005EFF"
         />
     <View
+        android:id="@+id/six"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="invisible"
         android:layout_weight="1"
-        android:background="#FFC107"
+        android:background="#B29D00FF"
         />
 
 
