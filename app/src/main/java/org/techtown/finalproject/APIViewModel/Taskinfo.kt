@@ -1,6 +1,6 @@
 package org.techtown.finalproject.APIViewModel
 
-class Taskinfo{
+class Taskinfo {
     var startDay : Int = 0
     var startMonth : Int = 0
     var endDay : Int = 0

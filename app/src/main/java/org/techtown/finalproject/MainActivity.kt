@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     companion object{
         val api = ApiViewModel()
         val TAG: String = "로그"
-        var db : UserDb? = null
+        lateinit var db : UserDb
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,25 +33,24 @@ class MainActivity : AppCompatActivity() {
                 Log.d(TAG, "login-data is saved")
                 val data = User(user.text.toString(),password.text.toString())
                 Log.d(TAG, "${data.passWord}, ${data.userNumber}")
-                CoroutineScope(Dispatchers.IO).launch {
-                    db!!.userDao().insert(data)
-                    Log.d(TAG, "data-save1")
-                }
-                Log.d(TAG, "data-save2")
+//                CoroutineScope(Dispatchers.IO).launch {
+//                    //db!!.userDao().insert(data)
+//                    Log.d(TAG, "data-save1")
+//                }
+//                Log.d(TAG, "data-save2")
             }
-            //Log.d(TAG, "user : ${db!!.userDao().check()}")
-            CoroutineScope(Dispatchers.Main).launch { 
-                val data = CoroutineScope(Dispatchers.IO).async { 
-                    db!!.userDao().get()
-                }.await()
-                CoroutineScope(Dispatchers.IO).launch {
-                    db!!.userDao().delete()
-                }
-                data.forEach {
-                    Log.d(TAG, "onCreate: ${it.userNumber} , ${it.passWord}")
-                }
-            }
-
+//            CoroutineScope(Dispatchers.Main).launch {
+//                val data = CoroutineScope(Dispatchers.IO).async {
+//                    db!!.userDao().get()
+//                }.await()
+//                CoroutineScope(Dispatchers.IO).launch {
+//                    db!!.userDao().delete()
+//                }
+//                data.forEach {
+//                    Log.d(TAG, "onCreate: ${it.userNumber} , ${it.passWord}")
+//                }
+//            }
+            api.getTask(user.text.toString(),password.text.toString())
             Toast.makeText(this, "test-text", Toast.LENGTH_SHORT).show()
             val intent = Intent(this,TaskViewWithCal::class.java)
             startActivity(intent)
