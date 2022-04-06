@@ -46,10 +46,19 @@ class AdapterDay(val tempMonth:Int, val dayList: MutableList<Date>,val taskList 
         scheduleList[5] = holder.layout.six
 
 
+        //위에서부터 비어있는 라인을 배정해줄 로직이 필요함....
+        // 색이 겹치면 같은 과제라고 착각 할 수 있으니 색은 랜덤으로 투명도만 낮춰서 배정하는게 좋을듯함
         taskList.forEachIndexed { index, it ->
             if (it.startMonth-1==dayList[position].month && it.startDay==dayList[position].date){
-                schedule[scheduleLine] = true
-                scheduleLine++
+//                schedule[scheduleLine] = true
+//                scheduleLine++
+                for(i in 0..5){
+                    if(!schedule[i]){
+                        schedule[i] = true
+                        it.taskLine = i
+                        break
+                    }
+                }
             }
         }
 
@@ -61,7 +70,7 @@ class AdapterDay(val tempMonth:Int, val dayList: MutableList<Date>,val taskList 
 
         taskList.forEachIndexed { index, it ->
             if (it.endMonth-1==dayList[position].month && it.endDay==dayList[position].date){
-                schedule[index] = false
+                schedule[it.taskLine] = false
             }
         }
 
