@@ -23,11 +23,11 @@ class AdapterDay(val tempMonth:Int, val dayList: MutableList<Date>,val taskList 
     val current = LocalDateTime.now()
     val forMatter = DateTimeFormatter.ofPattern("dd")
     val forMonth = DateTimeFormatter.ofPattern("MM")
-    val forMonthed = current.format(forMonth)
+    //val forMonthed = current.format(forMonth)
     val forMatted = current.format(forMatter)
     val scheduleList = arrayOfNulls<View>(6)
     val schedule = MutableList<Boolean>(6, init = {false})
-    var scheduleLine : Int = 0
+    //var scheduleLine : Int = 0
     inner class DayView(val layout: View): RecyclerView.ViewHolder(layout)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayView {
@@ -84,8 +84,6 @@ class AdapterDay(val tempMonth:Int, val dayList: MutableList<Date>,val taskList 
             6 -> Color.BLUE
             else -> Color.BLACK
         })
-//        if(tempMonth+2 == forMonthed.toInt() && dayList[position].date.toString() == forMatted)
-//            holder.layout.item_day_layout.setBackgroundResource(R.drawable.stroke)
 
         if(tempMonth != dayList[position].month - 1) {
             holder.layout.item_day_text.alpha = 0.4f
