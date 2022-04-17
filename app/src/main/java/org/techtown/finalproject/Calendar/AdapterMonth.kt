@@ -1,5 +1,6 @@
 package org.techtown.finalproject.Calendar
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -7,10 +8,11 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item_month.view.*
 import org.techtown.finalproject.APIViewModel.Taskinfo
+import org.techtown.finalproject.MainActivity.Companion.TAG
 import org.techtown.finalproject.R
 import java.util.*
 
-class AdapterMonth(val taskList : ArrayList<Taskinfo>): RecyclerView.Adapter<AdapterMonth.MonthView>() {
+class AdapterMonth(val taskList : List<Taskinfo>): RecyclerView.Adapter<AdapterMonth.MonthView>() {
     val center = Int.MAX_VALUE / 2
     private var calendar = Calendar.getInstance()
 
@@ -22,6 +24,7 @@ class AdapterMonth(val taskList : ArrayList<Taskinfo>): RecyclerView.Adapter<Ada
     }
 
     override fun onBindViewHolder(holder: MonthView, position: Int) {
+        Log.d(TAG, "onBindViewHolder: Month__called")
         calendar.time = Date()
         calendar.set(Calendar.DAY_OF_MONTH, 1)
         calendar.add(Calendar.MONTH, position - center)

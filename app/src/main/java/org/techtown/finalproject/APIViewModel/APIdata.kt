@@ -1,6 +1,5 @@
 package org.techtown.finalproject.APIViewModel
 
-import com.google.gson.annotations.SerializedName
 
 data class APIdata(
     val task: List<tasks>

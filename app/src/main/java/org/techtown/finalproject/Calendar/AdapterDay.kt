@@ -13,12 +13,13 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item_day.view.*
 import org.techtown.finalproject.APIViewModel.Taskinfo
 import org.techtown.finalproject.MainActivity.Companion.TAG
+import org.techtown.finalproject.MainActivity.Companion.api
 import org.techtown.finalproject.R
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import java.util.*
 
-class AdapterDay(val tempMonth:Int, val dayList: MutableList<Date>,val taskList : ArrayList<Taskinfo>): RecyclerView.Adapter<AdapterDay.DayView>() {
+class AdapterDay(val tempMonth:Int, val dayList: MutableList<Date>,val taskList : List<Taskinfo>): RecyclerView.Adapter<AdapterDay.DayView>() {
     val ROW = 6
     val current = LocalDateTime.now()
     val forMatter = DateTimeFormatter.ofPattern("dd")
@@ -31,13 +32,12 @@ class AdapterDay(val tempMonth:Int, val dayList: MutableList<Date>,val taskList 
     inner class DayView(val layout: View): RecyclerView.ViewHolder(layout)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DayView {
-        //Log.d(TAG, "onCreateViewHolder: $tempMonth, ${dayList[15].month}")
         var view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_day, parent, false)
         return DayView(view)
     }
 
     override fun onBindViewHolder(holder: DayView, position: Int) {
-        //Log.d(TAG, "onBindViewHolder: $position")
+        Log.d(TAG, "onBindViewHolder: $position")
         scheduleList[0] = holder.layout.one
         scheduleList[1] = holder.layout.two
         scheduleList[2] = holder.layout.three
@@ -48,8 +48,9 @@ class AdapterDay(val tempMonth:Int, val dayList: MutableList<Date>,val taskList 
 
         //위에서부터 비어있는 라인을 배정해줄 로직이 필요함....
         // 색이 겹치면 같은 과제라고 착각 할 수 있으니 색은 랜덤으로 투명도만 낮춰서 배정하는게 좋을듯함
-        taskList.forEachIndexed { index, it ->
-            if (it.startMonth-1==dayList[position].month && it.startDay==dayList[position].date){
+        taskList.forEach {
+            if(it.startMonth-1==dayList[position].month && it.startDay==dayList[position].date){
+                Log.d(TAG, "onBindViewHolder: 시작날짜 매칭")
 //                schedule[scheduleLine] = true
 //                scheduleLine++
                 for(i in 0..5){
@@ -67,10 +68,17 @@ class AdapterDay(val tempMonth:Int, val dayList: MutableList<Date>,val taskList 
                 scheduleList[i]!!.visibility = VISIBLE
             }
         }
+//        api.data.value!!.forEach {
+//            Log.d(TAG, "onBindViewHolder: 여기서 죽니?")
+//            if(it.taskLine != -1){
+//                scheduleList[it.taskLine]!!.visibility = VISIBLE
+//            }
+//        }
 
-        taskList.forEachIndexed { index, it ->
+        taskList.forEach {
             if (it.endMonth-1==dayList[position].month && it.endDay==dayList[position].date){
                 schedule[it.taskLine] = false
+                //it.taskLine = -1
             }
         }
 
