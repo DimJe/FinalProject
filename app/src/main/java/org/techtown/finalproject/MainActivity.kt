@@ -1,6 +1,7 @@
 package org.techtown.finalproject
 
 import android.content.Intent
+import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +21,8 @@ class MainActivity : AppCompatActivity() {
         val api = ApiViewModel()
         val TAG: String = "로그"
         lateinit var db : UserDb
+        val schedule = MutableList<Boolean>(6, init = {false})
+        val lineColor = arrayOfNulls<Int>(6)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

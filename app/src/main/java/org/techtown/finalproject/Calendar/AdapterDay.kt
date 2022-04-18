@@ -14,6 +14,8 @@ import kotlinx.android.synthetic.main.list_item_day.view.*
 import org.techtown.finalproject.APIViewModel.Taskinfo
 import org.techtown.finalproject.MainActivity.Companion.TAG
 import org.techtown.finalproject.MainActivity.Companion.api
+import org.techtown.finalproject.MainActivity.Companion.lineColor
+import org.techtown.finalproject.MainActivity.Companion.schedule
 import org.techtown.finalproject.R
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
@@ -27,7 +29,6 @@ class AdapterDay(val tempMonth:Int, val dayList: MutableList<Date>,val taskList 
     //val forMonthed = current.format(forMonth)
     val forMatted = current.format(forMatter)
     val scheduleList = arrayOfNulls<View>(6)
-    val schedule = MutableList<Boolean>(6, init = {false})
     //var scheduleLine : Int = 0
     inner class DayView(val layout: View): RecyclerView.ViewHolder(layout)
 
@@ -56,6 +57,10 @@ class AdapterDay(val tempMonth:Int, val dayList: MutableList<Date>,val taskList 
                 for(i in 0..5){
                     if(!schedule[i]){
                         schedule[i] = true
+                        val r = Random().nextInt(255)
+                        val g = Random().nextInt(255)
+                        val b = Random().nextInt(255)
+                        lineColor[i] = Color.rgb(r,g,b)
                         it.taskLine = i
                         break
                     }
@@ -65,6 +70,7 @@ class AdapterDay(val tempMonth:Int, val dayList: MutableList<Date>,val taskList 
 
         for(i in 0..5){
             if(schedule[i]){
+                scheduleList[i]!!.setBackgroundColor(lineColor[i]!!)
                 scheduleList[i]!!.visibility = VISIBLE
             }
         }

@@ -27,7 +27,7 @@ class ApiViewModel : ViewModel() {
             .writeTimeout(80, TimeUnit.SECONDS)
             .build()
         retrofit = Retrofit.Builder()
-            .baseUrl("http://3.85.10.166:8000/")
+            .baseUrl("http://3.37.36.237:8000/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
