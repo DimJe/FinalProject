@@ -27,7 +27,7 @@ class ApiViewModel : ViewModel() {
             .writeTimeout(80, TimeUnit.SECONDS)
             .build()
         retrofit = Retrofit.Builder()
-            .baseUrl("http://3.37.36.237:8000/")
+            .baseUrl("http://3.39.190.157:8000/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
@@ -42,14 +42,18 @@ class ApiViewModel : ViewModel() {
             override fun onResponse(call: Call<APIdata>, response: Response<APIdata>) {
                 Log.d(TAG,"CallAPI - onResponse() called")
                 temp.clear()
-                response.body()!!.task.forEach{
-                    temp.add(Taskinfo(it.d_day_start,it.d_day_end,it.title,it.course,it.content))
+                if(response.isSuccessful){
+                    response.body()!!.task.forEach{
+                        temp.add(Taskinfo(it.d_day_start,it.d_day_end,it.title,it.course,it.content))
+                    }
+                    temp.forEach {
+                    }
+                    Log.d(TAG, "onResponse: ${mark.elapsedNow()}")
+                    data.value = temp
                 }
-                temp.forEach {
-                    Log.d(TAG, "onResponse: ${it.startDay}, ${it.startMonth}, ${it.endDay}, ${it.endMonth}")
+                else{
+                    Log.d(TAG, "onResponse: ${response.code()}")
                 }
-                Log.d(TAG, "onResponse: ${mark.elapsedNow()}")
-                data.value = temp
 
             }
             override fun onFailure(call: Call<APIdata>, t: Throwable) {

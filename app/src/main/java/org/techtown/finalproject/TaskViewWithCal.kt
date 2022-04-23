@@ -7,6 +7,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import kotlinx.android.synthetic.main.activity_task_view_with_cal.*
+import kotlinx.android.synthetic.main.list_item_day.view.*
 import org.techtown.finalproject.APIViewModel.Taskinfo
 import org.techtown.finalproject.Calendar.AdapterMonth
 import org.techtown.finalproject.MainActivity.Companion.TAG
@@ -50,6 +51,8 @@ class TaskViewWithCal : AppCompatActivity() {
             }
             val snap = PagerSnapHelper()
             snap.attachToRecyclerView(calendar_custom)
+            
+
         })
 
     }

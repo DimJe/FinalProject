@@ -5,6 +5,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
@@ -12,6 +13,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.techtown.finalproject.APIViewModel.ApiViewModel
+import org.techtown.finalproject.Calendar.ScheduleItem
 import org.techtown.finalproject.Room.User
 import org.techtown.finalproject.Room.UserDb
 
@@ -21,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         val api = ApiViewModel()
         val TAG: String = "로그"
         lateinit var db : UserDb
-        val schedule = MutableList<Boolean>(6, init = {false})
+        val schedule = MutableList<ScheduleItem>(6, init = {ScheduleItem(false,"","")})
         val lineColor = arrayOfNulls<Int>(6)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
