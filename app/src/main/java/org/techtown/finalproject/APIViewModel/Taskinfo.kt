@@ -3,6 +3,7 @@ package org.techtown.finalproject.APIViewModel
 class Taskinfo {
     var startDay : Int = 0
     var startMonth : Int = 0
+    var startYear : Int = 0
     var endDay : Int = 0
     var endMonth : Int = 0
     var taskName : String = ""
@@ -17,5 +18,6 @@ class Taskinfo {
         this.taskName = taskName
         this.course = course
         this.content = content
+        this.startYear = (startDate[0].toString()+startDate[1].toString()+startDate[2].toString()+startDate[3].toString()).toInt()
     }
 }

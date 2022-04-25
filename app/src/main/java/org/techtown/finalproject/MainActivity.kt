@@ -23,8 +23,8 @@ class MainActivity : AppCompatActivity() {
         val api = ApiViewModel()
         val TAG: String = "로그"
         lateinit var db : UserDb
-        val schedule = MutableList<ScheduleItem>(6, init = {ScheduleItem(false,"","")})
         val lineColor = arrayOfNulls<Int>(6)
+        val scheduleList = arrayOfNulls<View>(6)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
