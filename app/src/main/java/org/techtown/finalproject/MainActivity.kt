@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
@@ -24,7 +25,7 @@ class MainActivity : AppCompatActivity() {
         val TAG: String = "로그"
         lateinit var db : UserDb
         val lineColor = arrayOfNulls<Int>(6)
-        val scheduleList = arrayOfNulls<View>(6)
+        val scheduleList = arrayOfNulls<TextView>(6)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,16 +35,21 @@ class MainActivity : AppCompatActivity() {
         db = UserDb.getInstance(applicationContext)!!
 
         login.setOnClickListener {
-            if(checked.isChecked){
+            if (checked.isChecked) {
                 Log.d(TAG, "login-data is saved")
-                val data = User(user.text.toString(),password.text.toString())
+                val data = User(user.text.toString(), password.text.toString())
                 Log.d(TAG, "${data.passWord}, ${data.userNumber}")
-//                CoroutineScope(Dispatchers.IO).launch {
+
+            }
+            api.getTask(user.text.toString(), password.text.toString())
+            val intent = Intent(this, TaskViewWithCal::class.java)
+            startActivity(intent)
+        }
+    //                CoroutineScope(Dispatchers.IO).launch {
 //                    //db!!.userDao().insert(data)
 //                    Log.d(TAG, "data-save1")
 //                }
 //                Log.d(TAG, "data-save2")
-            }
 //            CoroutineScope(Dispatchers.Main).launch {
 //                val data = CoroutineScope(Dispatchers.IO).async {
 //                    db!!.userDao().get()
@@ -55,11 +61,12 @@ class MainActivity : AppCompatActivity() {
 //                    Log.d(TAG, "onCreate: ${it.userNumber} , ${it.passWord}")
 //                }
 //            }
-            api.getTask(user.text.toString(),password.text.toString())
-            Toast.makeText(this, "test-text", Toast.LENGTH_SHORT).show()
-            val intent = Intent(this,TaskViewWithCal::class.java)
-            startActivity(intent)
-            finish()
-        }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        Log.d(TAG, "onRestart: called")
+        user.text.clear()
+        password.text.clear()
     }
 }

@@ -15,53 +15,65 @@
         android:text="9"
         android:textSize="10sp"
         android:textStyle="bold" />
-    <View
+    <TextView
         android:id="@+id/one"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible"
         android:background="#A4FF1100"
+        android:maxLines="1"
+        android:textSize="10sp"
         />
-    <View
+    <TextView
         android:id="@+id/two"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible"
         android:background="#AEFF8500"
+        android:maxLines="1"
+        android:textSize="10sp"
         />
-    <View
+    <TextView
         android:id="@+id/three"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible"
         android:background="#B0FFEB3B"
+        android:maxLines="1"
+        android:textSize="10sp"
         />
-    <View
+    <TextView
         android:id="@+id/four"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible"
         android:background="#B500FF0A"
+        android:maxLines="1"
+        android:textSize="10sp"
         />
-    <View
+    <TextView
         android:id="@+id/five"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible"
         android:background="#B5005EFF"
+        android:maxLines="1"
+        android:textSize="10sp"
         />
-    <View
+    <TextView
         android:id="@+id/six"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:visibility="invisible"
         android:layout_weight="1"
         android:background="#B29D00FF"
+        android:maxLines="1"
+        android:textSize="10sp"
         />
 
 

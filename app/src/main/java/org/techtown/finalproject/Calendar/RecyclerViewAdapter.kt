@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item_day.view.*
 import org.techtown.finalproject.APIViewModel.Taskinfo
@@ -22,7 +23,7 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
 
     val baseCalendar = BaseCalendar()
     //val scheduleList = arrayOfNulls<View>(6)
-    val schedule = MutableList<ScheduleItem>(6, init = {ScheduleItem(false,"","")})
+    val schedule = MutableList<ScheduleItem>(6, init = {ScheduleItem(false,"","","")})
     init {
         baseCalendar.initBaseCalendar {
             refreshView(it)
@@ -78,6 +79,7 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
                         schedule[i].startRange = (it.startMonth-1).toString() + if(it.startDay.toString().length==1) "0"+it.startDay.toString() else it.startDay
                         schedule[i].endRange = (it.endMonth-1).toString() + if(it.endDay.toString().length==1) "0"+it.endDay.toString() else it.endDay
                         it.taskLine = i
+                        schedule[i].title = it.taskName
                         break
                     }
                 }
@@ -88,6 +90,14 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
                 Log.i("태그", "onBindViewHolder:왜 그려지는거야 싀발 $i ")
                 //Log.d(TAG, "schedule : $i")
                 scheduleList[i]!!.visibility = View.VISIBLE
+                if(schedule[i].title.length>9) {
+                    scheduleList[i]!!.text = schedule[i].title.substring(0 until 9)
+                    schedule[i].title = schedule[i].title.substring(9)
+                }
+                else {
+                    scheduleList[i]!!.text = schedule[i].title.substring(0)
+                    schedule[i].title = ""
+                }
             }
         }
         taskList.forEach {
@@ -96,6 +106,7 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
                 schedule[it.taskLine].check = false
                 schedule[it.taskLine].startRange = ""
                 schedule[it.taskLine].endRange = ""
+                schedule[it.taskLine].title = ""
                 //it.taskLine = -1
             }
         }

@@ -79,4 +79,6 @@ dependencies {
     // optional - Paging 3 Integration
     //implementation("androidx.room:room-paging:$roomVersion")
     implementation "androidx.viewpager2:viewpager2:1.0.0"
+
+    implementation 'com.airbnb.android:lottie:3.0.7'
 }

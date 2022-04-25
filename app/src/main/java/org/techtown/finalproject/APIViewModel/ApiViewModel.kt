@@ -55,7 +55,6 @@ class ApiViewModel : ViewModel() {
                             cal.time = Date()
                             cal.set(Calendar.MONTH,it.startMonth-1)
                             val end : Int = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
-                            Log.d(TAG, "onResponse: ${end}")
                             val str : String = it.startYear.toString() + if(it.startMonth+1>9) "-"+(it.startMonth+1).toString() else "-0"+(it.startMonth+1).toString() + "-" + "01"
                             val str2 : String = it.startYear.toString() + if(it.endMonth>9) "-" else "-0"+(it.endMonth).toString() + if(it.endDay>9) "-"+it.endDay.toString() else "-0" + (it.endDay).toString()
                             Log.d(TAG, "$str  $str2")
@@ -67,14 +66,13 @@ class ApiViewModel : ViewModel() {
                     temp2.forEach {
                         temp.add(it)
                     }
-                    temp.forEach {
-                        Log.d(TAG, "${it.startMonth} ${it.startDay} ~ ${it.endMonth} ${it.endDay}")
-                    }
                     Log.d(TAG, "onResponse: ${mark.elapsedNow()}")
                     data.value = temp
                 }
                 else{
                     Log.d(TAG, "onResponse: ${response.code()}")
+                    temp.add(Taskinfo("9999-99-99","9999-99-99","","",""))
+                    data.value = temp
                 }
 
             }

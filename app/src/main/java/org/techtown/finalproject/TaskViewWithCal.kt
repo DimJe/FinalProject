@@ -1,12 +1,21 @@
 package org.techtown.finalproject
 
+import android.app.Dialog
+import android.content.Intent
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.Window
+import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_task_view_with_cal.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers.Main
+import kotlinx.coroutines.launch
 import org.techtown.finalproject.APIViewModel.Taskinfo
 import org.techtown.finalproject.Calendar.BaseCalendar
 import org.techtown.finalproject.Calendar.RecyclerViewAdapter
@@ -18,13 +27,32 @@ import kotlin.collections.ArrayList
 
 class TaskViewWithCal : AppCompatActivity() {
     lateinit var scheduleRecyclerViewAdapter: RecyclerViewAdapter
+    //val loading = LoadingDialog(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_view_with_cal)
 
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.loading)
+        dialog.setCancelable(true)
+        dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        dialog.show()
+
         api.data.observe(this, Observer{
             Log.d(TAG, "observe : called ")
-            initView(api.data.value!!)
+            if(api.data.value!!.isEmpty()){}
+            else if(it[0].startMonth==99){
+                dialog.dismiss()
+                Toast.makeText(this, "학번과 패스워드가 잘못되었습니다", Toast.LENGTH_SHORT).show()
+                api.data.value!!.clear()
+                finish()
+            }
+            else{
+                dialog.dismiss()
+                initView(api.data.value!!)
+            }
+
         })
 
     }
@@ -34,8 +62,8 @@ class TaskViewWithCal : AppCompatActivity() {
 
         rv_schedule.layoutManager = GridLayoutManager(this, BaseCalendar.DAYS_OF_WEEK)
         rv_schedule.adapter = scheduleRecyclerViewAdapter
-        rv_schedule.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
-        rv_schedule.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
+        //rv_schedule.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.HORIZONTAL))
+        //rv_schedule.addItemDecoration(DividerItemDecoration(this, DividerItemDecoration.VERTICAL))
 
         tv_prev_month.setOnClickListener {
             scheduleRecyclerViewAdapter.changeToPrevMonth()
