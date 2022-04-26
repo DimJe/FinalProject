@@ -49,6 +49,9 @@ class ApiViewModel : ViewModel() {
                     response.body()!!.task.forEach{
                         temp.add(Taskinfo(it.d_day_start,it.d_day_end,it.title,it.course,it.content))
                     }
+                    if(temp.isEmpty()){
+                        temp.add(Taskinfo("6666-66-66","6666-66-66","","",""))
+                    }
                     temp.forEach {
                         if (it.startMonth != it.endMonth){
                             val cal = Calendar.getInstance()

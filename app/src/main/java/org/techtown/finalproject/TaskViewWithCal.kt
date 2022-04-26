@@ -41,7 +41,12 @@ class TaskViewWithCal : AppCompatActivity() {
 
         api.data.observe(this, Observer{
             Log.d(TAG, "observe : called ")
-            if(api.data.value!!.isEmpty()){}
+            if(api.data.value!!.isEmpty()){ }
+            else if(it[0].startMonth==66){
+                dialog.dismiss()
+                Toast.makeText(this,"과제가 없습니다.",Toast.LENGTH_SHORT).show()
+                initView(api.data.value!!)
+            }
             else if(it[0].startMonth==99){
                 dialog.dismiss()
                 Toast.makeText(this, "학번과 패스워드가 잘못되었습니다", Toast.LENGTH_SHORT).show()

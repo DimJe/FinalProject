@@ -22,7 +22,6 @@ import kotlin.collections.ArrayList
 class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: ArrayList<Taskinfo>) : RecyclerView.Adapter<ViewHolderHelper>() {
 
     val baseCalendar = BaseCalendar()
-    //val scheduleList = arrayOfNulls<View>(6)
     val schedule = MutableList<ScheduleItem>(6, init = {ScheduleItem(false,"","","")})
     init {
         baseCalendar.initBaseCalendar {
@@ -90,9 +89,9 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
                 Log.i("태그", "onBindViewHolder:왜 그려지는거야 싀발 $i ")
                 //Log.d(TAG, "schedule : $i")
                 scheduleList[i]!!.visibility = View.VISIBLE
-                if(schedule[i].title.length>9) {
-                    scheduleList[i]!!.text = schedule[i].title.substring(0 until 9)
-                    schedule[i].title = schedule[i].title.substring(9)
+                if(schedule[i].title.length>8) {
+                    scheduleList[i]!!.text = schedule[i].title.substring(0 until 8)
+                    schedule[i].title = schedule[i].title.substring(8)
                 }
                 else {
                     scheduleList[i]!!.text = schedule[i].title.substring(0)
