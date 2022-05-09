@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item_day.view.*
 import org.techtown.finalproject.APIViewModel.Taskinfo
+import org.techtown.finalproject.MainActivity.Companion.dayTask
 import org.techtown.finalproject.MainActivity.Companion.scheduleList
 import org.techtown.finalproject.R
 import org.techtown.finalproject.TaskViewWithCal
@@ -22,7 +23,7 @@ import kotlin.collections.ArrayList
 class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: ArrayList<Taskinfo>) : RecyclerView.Adapter<ViewHolderHelper>() {
 
     val baseCalendar = BaseCalendar()
-    val schedule = MutableList<ScheduleItem>(6, init = {ScheduleItem(false,"","","")})
+    val schedule = MutableList<ScheduleItem>(6, init = {ScheduleItem(false,"","","","")})
     init {
         baseCalendar.initBaseCalendar {
             refreshView(it)
@@ -75,10 +76,13 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
                 for(i in 0..5){
                     if(!schedule[i].check){
                         schedule[i].check = true
-                        schedule[i].startRange = (it.startMonth-1).toString() + if(it.startDay.toString().length==1) "0"+it.startDay.toString() else it.startDay
-                        schedule[i].endRange = (it.endMonth-1).toString() + if(it.endDay.toString().length==1) "0"+it.endDay.toString() else it.endDay
+                        schedule[i].startRange = (it.startMonth-1).toString() +
+                                if(it.startDay.toString().length==1) "0"+it.startDay.toString() else it.startDay
+                        schedule[i].endRange = (it.endMonth-1).toString() +
+                                if(it.endDay.toString().length==1) "0"+it.endDay.toString() else it.endDay
                         it.taskLine = i
                         schedule[i].title = it.taskName
+                        schedule[i].index = it.taskName
                         break
                     }
                 }
@@ -86,6 +90,7 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
         }
         for(i in 0..5){
             if(schedule[i].check && (schedule[i].startRange <= dayRange) && (dayRange <= schedule[i].endRange)){
+                dayTask[position].add(taskList.find{ it.taskName==schedule[i].index }!!)
                 Log.i("태그", "onBindViewHolder:왜 그려지는거야 싀발 $i ")
                 //Log.d(TAG, "schedule : $i")
                 scheduleList[i]!!.visibility = View.VISIBLE
@@ -113,6 +118,9 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
     }
 
     fun changeToPrevMonth() {
+        dayTask.forEach {
+            it.clear()
+        }
         schedule.forEach {
             it.check = false
             it.startRange = ""
@@ -124,6 +132,9 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
     }
 
     fun changeToNextMonth() {
+        dayTask.forEach {
+            it.clear()
+        }
         baseCalendar.changeToNextMonth {
             refreshView(it)
         }

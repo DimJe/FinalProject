@@ -14,6 +14,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import org.techtown.finalproject.APIViewModel.ApiViewModel
+import org.techtown.finalproject.APIViewModel.Taskinfo
 import org.techtown.finalproject.Calendar.ScheduleItem
 import org.techtown.finalproject.Room.User
 import org.techtown.finalproject.Room.UserDb
@@ -26,11 +27,11 @@ class MainActivity : AppCompatActivity() {
         lateinit var db : UserDb
         val lineColor = arrayOfNulls<Int>(6)
         val scheduleList = arrayOfNulls<TextView>(6)
+        var dayTask = ArrayList<ArrayList<Taskinfo>>(42)
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
         Log.d(TAG, "onCreate: called")
         db = UserDb.getInstance(applicationContext)!!
 
