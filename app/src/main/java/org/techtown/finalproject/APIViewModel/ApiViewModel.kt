@@ -30,17 +30,17 @@ class ApiViewModel : ViewModel() {
             .writeTimeout(50, TimeUnit.SECONDS)
             .build()
         retrofit = Retrofit.Builder()
-            .baseUrl("http://13.125.17.17:8000/")
+            .baseUrl("http://13.125.17.17:8001/")
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
     }
     @OptIn(ExperimentalTime::class)
-    fun getTask(id:String, pw:String){
+    fun getTask(id:String, pw:String,token:String){
         var mark = TimeSource.Monotonic.markNow()
         val api = retrofit.create(GetTaskData::class.java)
         Log.d(TAG, "getTask: called")
-        val result = api.sendData(lmsItem(id,pw))
+        val result = api.sendData(lmsItem(id,pw,token))
         result.enqueue(object : Callback<APIdata>{
             override fun onResponse(call: Call<APIdata>, response: Response<APIdata>) {
                 Log.d(TAG,"CallAPI - onResponse() called")
@@ -53,6 +53,7 @@ class ApiViewModel : ViewModel() {
                         temp.add(Taskinfo("6666-66-66","6666-66-66","","",""))
                     }
                     temp.forEach {
+                        Log.d(TAG, "onResponse: ${it.taskName}")
                         if (it.startMonth != it.endMonth){
                             val cal = Calendar.getInstance()
                             cal.time = Date()

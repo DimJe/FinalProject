@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item_day.view.*
 import org.techtown.finalproject.APIViewModel.Taskinfo
+import org.techtown.finalproject.MainActivity.Companion.TAG
 import org.techtown.finalproject.MainActivity.Companion.dayTask
 import org.techtown.finalproject.MainActivity.Companion.scheduleList
 import org.techtown.finalproject.R
@@ -31,6 +32,7 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderHelper {
+        Log.d(TAG, "onCreateViewHolder: called")
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_day, parent, false)
         return ViewHolderHelper(view)
     }
@@ -90,7 +92,7 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
         }
         for(i in 0..5){
             if(schedule[i].check && (schedule[i].startRange <= dayRange) && (dayRange <= schedule[i].endRange)){
-                dayTask[position].add(taskList.find{ it.taskName==schedule[i].index }!!)
+                //dayTask[position].add(taskList.find{ it.taskName==schedule[i].index }!!)
                 Log.i("태그", "onBindViewHolder:왜 그려지는거야 싀발 $i ")
                 //Log.d(TAG, "schedule : $i")
                 scheduleList[i]!!.visibility = View.VISIBLE

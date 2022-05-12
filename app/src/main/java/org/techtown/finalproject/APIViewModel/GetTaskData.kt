@@ -7,7 +7,5 @@ import retrofit2.http.Query
 
 interface GetTaskData {
     @POST("api/lms-items/")
-    fun sendData(@Body lmsItem : lmsItem
-
-    ): Call<APIdata>
+    fun sendData(@Body lmsItem : lmsItem): Call<APIdata>
 }

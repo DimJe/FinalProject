@@ -41,7 +41,10 @@ class TaskViewWithCal : AppCompatActivity() {
 
         api.data.observe(this, Observer{
             Log.d(TAG, "observe : called ")
-            if(api.data.value!!.isEmpty()){ }
+            if(api.data.value!!.isEmpty()){
+                Toast.makeText(this,"몰루",Toast.LENGTH_SHORT).show()
+
+            }
             else if(it[0].startMonth==66){
                 dialog.dismiss()
                 Toast.makeText(this,"과제가 없습니다.",Toast.LENGTH_SHORT).show()
@@ -54,6 +57,7 @@ class TaskViewWithCal : AppCompatActivity() {
                 finish()
             }
             else{
+                Toast.makeText(this,"몰루22",Toast.LENGTH_SHORT).show()
                 dialog.dismiss()
                 initView(api.data.value!!)
             }
@@ -63,6 +67,7 @@ class TaskViewWithCal : AppCompatActivity() {
     }
     fun initView(taskList: ArrayList<Taskinfo>) {
 
+        Log.d(TAG, "initView: called")
         scheduleRecyclerViewAdapter = RecyclerViewAdapter(this,taskList)
 
         rv_schedule.layoutManager = GridLayoutManager(this, BaseCalendar.DAYS_OF_WEEK)
