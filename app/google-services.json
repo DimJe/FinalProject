@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "661312732420",
+    "firebase_url": "https://lms-assignment-default-rtdb.firebaseio.com",
+    "project_id": "lms-assignment",
+    "storage_bucket": "lms-assignment.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:661312732420:android:07e9f6224b104308032451",
+        "android_client_info": {
+          "package_name": "org.techtown.finalproject"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "661312732420-qt7stld9mh5k2kbo0btr0ratt54jl6f8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "org.techtown.finalproject",
+            "certificate_hash": "d47c95292bc1fb92da06d006a6578ce63904fc96"
+          }
+        },
+        {
+          "client_id": "661312732420-3839kf3mgpofmcojb6e4thtio4n5ffu1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyArjqWURDv0bgI_S13VDhmIvbk60Psy_O4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "661312732420-3839kf3mgpofmcojb6e4thtio4n5ffu1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

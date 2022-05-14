@@ -1,6 +1,7 @@
 package org.techtown.finalproject
 
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -8,6 +9,8 @@ import android.util.Log
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,22 +32,26 @@ class MainActivity : AppCompatActivity() {
         val scheduleList = arrayOfNulls<TextView>(6)
         var dayTask = Array<ArrayList<Taskinfo>>(42){ArrayList<Taskinfo>()}
     }
+    var toke : String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        getFCMToken()
         Log.d(TAG, "onCreate: called")
         db = UserDb.getInstance(applicationContext)!!
-        var token : String = ""
         login.setOnClickListener {
-            token = "cMv4gx_4SOe1lWq-zq5BWH:APA91bGVcvcwCKiPav6JuGoddKFmRmkMVryc10YZ9Z1XZeKO3KzW4OOj8jvIB-5Lwhpz2jkfm3Il4lNOda9p955MdPY2o0q9QdcvARhrQUfmMrlC9lcQaRl8Zhukzo7EkwWwU3BUHsXA"
+            val sharedPreferences = getSharedPreferences("sFile1",MODE_PRIVATE)
+            var tokenNew = sharedPreferences.getString("Token1","null")
+            Log.d(TAG, "토큰토큰 new: ${tokenNew} ")
+            toke = "cMv4gx_4SOe1lWq-zq5BWH:APA91bGVcvcwCKiPav6JuGoddKFmRmkMVryc10YZ9Z1XZeKO3KzW4OOj8jvIB-5Lwhpz2jkfm3Il4lNOda9p955MdPY2o0q9QdcvARhrQUfmMrlC9lcQaRl8Zhukzo7EkwWwU3BUHsXA"
             if (checked.isChecked) {
                 Log.d(TAG, "login-data is saved")
                 val data = User(user.text.toString(), password.text.toString())
                 Log.d(TAG, "${data.passWord}, ${data.userNumber}")
 
             }
-            Log.d(TAG, "토큰토큰: $token")
-            api.getTask(user.text.toString(), password.text.toString(),token)
+            Log.d(TAG, "토큰토큰: $toke")
+            api.getTask(user.text.toString(), password.text.toString(),toke)
             val intent = Intent(this, TaskViewWithCal::class.java)
             startActivity(intent)
         }
@@ -65,7 +72,7 @@ class MainActivity : AppCompatActivity() {
 //                }
 //            }
     }
-    fun getFCMToken(): String{
+    fun getFCMToken(){
         var token: String = ""
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
@@ -75,12 +82,15 @@ class MainActivity : AppCompatActivity() {
 
             // Get new FCM registration token
             token = task.result.toString()
-            //return@OnCompleteListener
+            toke = token
+            val sharedPreferences = getSharedPreferences("sFile1",MODE_PRIVATE)
+            val editor = sharedPreferences.edit()
+            // key, value를 이용하여 저장하는 형태 editor.commit();
+            editor.putString("Token1",token)
+            editor.commit()
             // Log and toast
             Log.d(TAG, "FCM Token is ${token} size : ${token.length}")
         })
-        Log.d(TAG, "getFCMToken: ${token}")
-        return token
     }
 
     override fun onRestart() {
