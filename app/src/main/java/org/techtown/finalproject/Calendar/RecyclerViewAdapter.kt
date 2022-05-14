@@ -13,6 +13,7 @@ import kotlinx.android.synthetic.main.list_item_day.view.*
 import org.techtown.finalproject.APIViewModel.Taskinfo
 import org.techtown.finalproject.ListView.TaskViewWithList
 import org.techtown.finalproject.MainActivity.Companion.TAG
+import org.techtown.finalproject.MainActivity.Companion.TAG
 import org.techtown.finalproject.MainActivity.Companion.dayTask
 import org.techtown.finalproject.MainActivity.Companion.scheduleList
 import org.techtown.finalproject.R
@@ -27,7 +28,7 @@ import kotlin.collections.ArrayList
 class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: ArrayList<Taskinfo>) : RecyclerView.Adapter<ViewHolderHelper>() {
 
     val baseCalendar = BaseCalendar()
-    val schedule = MutableList<ScheduleItem>(6, init = {ScheduleItem(false,"","","",null)})
+    val schedule = MutableList<ScheduleItem>(6, init = {ScheduleItem(false,"","","","")})
     init {
         baseCalendar.initBaseCalendar {
             refreshView(it)
