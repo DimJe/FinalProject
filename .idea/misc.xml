@@ -6,12 +6,13 @@
         <entry key="..\:/Users/82109/StudioProjects/FinalProject/app/src/main/res/drawable/round.xml" value="0.21822916666666667" />
         <entry key="..\:/Users/82109/StudioProjects/FinalProject/app/src/main/res/layout/activity_main.xml" value="0.184375" />
         <entry key="..\:/Users/82109/StudioProjects/FinalProject/app/src/main/res/layout/activity_task_view_with_cal.xml" value="0.36614583333333334" />
+        <entry key="..\:/Users/82109/StudioProjects/FinalProject/app/src/main/res/layout/activity_task_view_with_list.xml" value="0.18333333333333332" />
         <entry key="..\:/Users/82109/StudioProjects/FinalProject/app/src/main/res/layout/list_item_day.xml" value="0.33" />
         <entry key="..\:/Users/82109/StudioProjects/FinalProject/app/src/main/res/layout/list_item_month.xml" value="0.36614583333333334" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

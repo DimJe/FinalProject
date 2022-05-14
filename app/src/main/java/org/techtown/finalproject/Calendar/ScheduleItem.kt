@@ -1,4 +1,6 @@
 package org.techtown.finalproject.Calendar
 
-class ScheduleItem(var check : Boolean = false, var startRange : String,var endRange : String,var title : String,var index : String) {
+import org.techtown.finalproject.APIViewModel.Taskinfo
+
+class ScheduleItem(var check : Boolean = false, var startRange : String,var endRange : String,var title : String,var item : Taskinfo?) {
 }

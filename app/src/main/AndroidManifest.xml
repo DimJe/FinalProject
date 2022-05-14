@@ -12,7 +12,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.FinalProject"
         android:usesCleartextTraffic="true">
-        <activity android:name=".test"></activity>
+        <activity
+            android:name=".ListView.TaskViewWithList"
+            android:exported="true" />
         <activity
             android:name=".TaskViewWithCal"
             android:exported="true" />

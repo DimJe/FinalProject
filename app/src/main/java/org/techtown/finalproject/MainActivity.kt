@@ -27,13 +27,14 @@ class MainActivity : AppCompatActivity() {
         lateinit var db : UserDb
         val lineColor = arrayOfNulls<Int>(6)
         val scheduleList = arrayOfNulls<TextView>(6)
-        var dayTask = ArrayList<ArrayList<Taskinfo>>(42)
+        var dayTask = Array<ArrayList<Taskinfo>>(42){ArrayList<Taskinfo>()}
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         Log.d(TAG, "onCreate: called")
         db = UserDb.getInstance(applicationContext)!!
+        var x = 1
 
         login.setOnClickListener {
             if (checked.isChecked) {

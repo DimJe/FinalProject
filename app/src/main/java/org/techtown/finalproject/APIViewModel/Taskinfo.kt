@@ -1,6 +1,8 @@
 package org.techtown.finalproject.APIViewModel
 
-class Taskinfo {
+import java.io.Serializable
+
+class Taskinfo :Serializable{
     var startDay : Int = 0
     var startMonth : Int = 0
     var startYear : Int = 0

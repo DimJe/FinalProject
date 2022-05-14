@@ -1,14 +1,18 @@
 package org.techtown.finalproject.Calendar
 
+import android.content.Intent
 import android.graphics.Color
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item_day.view.*
 import org.techtown.finalproject.APIViewModel.Taskinfo
+import org.techtown.finalproject.ListView.TaskViewWithList
+import org.techtown.finalproject.MainActivity.Companion.TAG
 import org.techtown.finalproject.MainActivity.Companion.dayTask
 import org.techtown.finalproject.MainActivity.Companion.scheduleList
 import org.techtown.finalproject.R
@@ -23,11 +27,15 @@ import kotlin.collections.ArrayList
 class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: ArrayList<Taskinfo>) : RecyclerView.Adapter<ViewHolderHelper>() {
 
     val baseCalendar = BaseCalendar()
-    val schedule = MutableList<ScheduleItem>(6, init = {ScheduleItem(false,"","","","")})
+    val schedule = MutableList<ScheduleItem>(6, init = {ScheduleItem(false,"","","",null)})
     init {
         baseCalendar.initBaseCalendar {
             refreshView(it)
         }
+        repeat(dayTask.size) {
+            ArrayList<Taskinfo>()
+        }
+
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderHelper {
@@ -82,7 +90,7 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
                                 if(it.endDay.toString().length==1) "0"+it.endDay.toString() else it.endDay
                         it.taskLine = i
                         schedule[i].title = it.taskName
-                        schedule[i].index = it.taskName
+                        schedule[i].item = it
                         break
                     }
                 }
@@ -90,7 +98,7 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
         }
         for(i in 0..5){
             if(schedule[i].check && (schedule[i].startRange <= dayRange) && (dayRange <= schedule[i].endRange)){
-                dayTask[position].add(taskList.find{ it.taskName==schedule[i].index }!!)
+                dayTask[position].add(schedule[i].item!!)
                 Log.i("태그", "onBindViewHolder:왜 그려지는거야 싀발 $i ")
                 //Log.d(TAG, "schedule : $i")
                 scheduleList[i]!!.visibility = View.VISIBLE
@@ -111,8 +119,23 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
                 schedule[it.taskLine].startRange = ""
                 schedule[it.taskLine].endRange = ""
                 schedule[it.taskLine].title = ""
+                schedule[it.taskLine].item = null
                 //it.taskLine = -1
             }
+        }
+        holder.itemView.setOnClickListener{
+            if(dayTask[position].isNotEmpty()){
+                dayTask[position].forEach {
+                    Log.d(TAG, "ssss: ${it.taskName} ")
+                    Toast.makeText(mainActivity, "${it.taskName}", Toast.LENGTH_SHORT).show()
+                }
+            }
+            val intent = Intent(mainActivity,TaskViewWithList::class.java).apply {
+                putExtra("data", dayTask[position])
+                putExtra("month",(baseCalendar.month+1).toString())
+                putExtra("day",baseCalendar.data[position].toString())
+            }.run { mainActivity.startActivity(this) }
+
         }
 
     }
