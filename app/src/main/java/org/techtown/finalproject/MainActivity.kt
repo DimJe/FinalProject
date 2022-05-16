@@ -32,7 +32,6 @@ class MainActivity : AppCompatActivity() {
         val scheduleList = arrayOfNulls<TextView>(6)
         var dayTask = Array<ArrayList<Taskinfo>>(42){ArrayList<Taskinfo>()}
     }
-    var toke : String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -43,15 +42,13 @@ class MainActivity : AppCompatActivity() {
             val sharedPreferences = getSharedPreferences("sFile1",MODE_PRIVATE)
             var tokenNew = sharedPreferences.getString("Token1","null")
             Log.d(TAG, "토큰토큰 new: ${tokenNew} ")
-            toke = "cMv4gx_4SOe1lWq-zq5BWH:APA91bGVcvcwCKiPav6JuGoddKFmRmkMVryc10YZ9Z1XZeKO3KzW4OOj8jvIB-5Lwhpz2jkfm3Il4lNOda9p955MdPY2o0q9QdcvARhrQUfmMrlC9lcQaRl8Zhukzo7EkwWwU3BUHsXA"
             if (checked.isChecked) {
                 Log.d(TAG, "login-data is saved")
                 val data = User(user.text.toString(), password.text.toString())
                 Log.d(TAG, "${data.passWord}, ${data.userNumber}")
 
             }
-            Log.d(TAG, "토큰토큰: $toke")
-            api.getTask(user.text.toString(), password.text.toString(),toke)
+            api.getTask(user.text.toString(), password.text.toString(),tokenNew!!)
             val intent = Intent(this, TaskViewWithCal::class.java)
             startActivity(intent)
         }
@@ -79,10 +76,8 @@ class MainActivity : AppCompatActivity() {
                 Log.w(TAG, "Fetching FCM registration token failed", task.exception)
                 return@OnCompleteListener
             }
-
             // Get new FCM registration token
             token = task.result.toString()
-            toke = token
             val sharedPreferences = getSharedPreferences("sFile1",MODE_PRIVATE)
             val editor = sharedPreferences.edit()
             // key, value를 이용하여 저장하는 형태 editor.commit();
@@ -98,5 +93,6 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onRestart: called")
         user.text.clear()
         password.text.clear()
+        api.data.value!!.clear()
     }
 }

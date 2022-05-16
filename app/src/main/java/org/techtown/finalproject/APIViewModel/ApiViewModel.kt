@@ -45,6 +45,7 @@ class ApiViewModel : ViewModel() {
             override fun onResponse(call: Call<APIdata>, response: Response<APIdata>) {
                 Log.d(TAG,"CallAPI - onResponse() called")
                 temp.clear()
+                temp2.clear()
                 if(response.isSuccessful){
                     response.body()!!.task.forEach{
                         temp.add(Taskinfo(it.d_day_start,it.d_day_end,it.title,it.course,it.content))
@@ -67,9 +68,7 @@ class ApiViewModel : ViewModel() {
                             it.endMonth = it.startMonth
                         }
                     }
-                    temp2.forEach {
-                        temp.add(it)
-                    }
+                    temp.addAll(temp2)
                     Log.d(TAG, "onResponse: ${mark.elapsedNow()}")
                     data.value = temp
                 }
