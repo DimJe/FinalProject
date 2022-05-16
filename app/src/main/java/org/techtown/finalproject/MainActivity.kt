@@ -35,13 +35,14 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        getFCMToken()
+        val sharedPreferences = getSharedPreferences("sFile1",MODE_PRIVATE)
+        var tokenNew = sharedPreferences.getString("Token1","null")
+        Log.d(TAG, "토큰토큰 new: ${tokenNew} ")
+        //getFCMToken()
         Log.d(TAG, "onCreate: called")
         db = UserDb.getInstance(applicationContext)!!
         login.setOnClickListener {
-            val sharedPreferences = getSharedPreferences("sFile1",MODE_PRIVATE)
-            var tokenNew = sharedPreferences.getString("Token1","null")
-            Log.d(TAG, "토큰토큰 new: ${tokenNew} ")
+            getFCMToken()
             if (checked.isChecked) {
                 Log.d(TAG, "login-data is saved")
                 val data = User(user.text.toString(), password.text.toString())
@@ -52,22 +53,6 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, TaskViewWithCal::class.java)
             startActivity(intent)
         }
-    //                CoroutineScope(Dispatchers.IO).launch {
-//                    //db!!.userDao().insert(data)
-//                    Log.d(TAG, "data-save1")
-//                }
-//                Log.d(TAG, "data-save2")
-//            CoroutineScope(Dispatchers.Main).launch {
-//                val data = CoroutineScope(Dispatchers.IO).async {
-//                    db!!.userDao().get()
-//                }.await()
-//                CoroutineScope(Dispatchers.IO).launch {
-//                    db!!.userDao().delete()
-//                }
-//                data.forEach {
-//                    Log.d(TAG, "onCreate: ${it.userNumber} , ${it.passWord}")
-//                }
-//            }
     }
     fun getFCMToken(){
         var token: String = ""

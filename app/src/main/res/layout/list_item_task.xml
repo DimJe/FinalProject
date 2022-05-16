@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_margin="20dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="20dp">
+    <RelativeLayout
+        android:id="@+id/list_item_task"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        >
+        <TextView
+            android:id="@+id/courseName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="창의적 종합설계"
+            android:layout_alignParentLeft="true"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/professor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/courseName"
+            android:layout_toLeftOf="@id/showMore"
+            android:text="김상경"
+            android:gravity="center"
+            android:textSize="15dp" />
+
+        <ImageButton
+            android:tag="0"
+            android:id="@+id/showMore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/more"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/deadLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/courseName"
+            android:layout_marginTop="10dp"
+            android:text="2022-05-10~2022-05-17"
+            android:textSize="15dp" />
+
+        <TextView
+            android:id="@+id/taskName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/deadLine"
+            android:layout_marginTop="10dp"
+            android:text="개인 작업 일지 및 팀 작업 일지 제출"
+            android:textSize="15dp" />
+
+        <TextView
+            android:visibility="gone"
+            android:id="@+id/taskContent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/taskName"
+            android:layout_marginTop="10dp"
+            android:text="개인 작업 일지 및 팀 작업 일지를 하나의 파일로 압축해 팀장이 제출하세요"
+            android:textSize="15dp" />
+
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>
