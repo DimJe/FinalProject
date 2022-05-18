@@ -10,5 +10,6 @@ data class tasks(
     val d_day_start : String,
     val d_day_end : String,
     val clear: String,
-    val content : String
+    val content : String,
+    val professor : String
 )

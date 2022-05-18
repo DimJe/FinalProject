@@ -12,7 +12,8 @@ class Taskinfo :Serializable{
     var taskLine : Int = 0
     var course : String = ""
     var content : String = ""
-    constructor(startDate : String,endDate : String,taskName : String,course: String,content : String){
+    var professor : String = ""
+    constructor(startDate : String,endDate : String,taskName : String,course: String,content : String,professor : String){
         this.startDay = (startDate[8].toString()+startDate[9].toString()).toInt()
         this.startMonth = (startDate[5].toString()+startDate[6].toString()).toInt()
         this.endDay = (endDate[8].toString()+endDate[9].toString()).toInt()
@@ -21,5 +22,6 @@ class Taskinfo :Serializable{
         this.course = course
         this.content = content
         this.startYear = (startDate[0].toString()+startDate[1].toString()+startDate[2].toString()+startDate[3].toString()).toInt()
+        this.professor = professor
     }
 }

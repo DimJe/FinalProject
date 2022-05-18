@@ -17,7 +17,7 @@ class ListViewAdapter(val todayList: ArrayList<Taskinfo>): RecyclerView.Adapter<
 
     override fun onBindViewHolder(holder: ViewHolderHelper, position: Int) {
         holder.itemView.courseName.text = todayList[position].course
-        holder.itemView.professor.text = "김땡떙"
+        holder.itemView.professor.text = todayList[position].professor
         val str = todayList[position].startMonth.toString() +"-"+todayList[position].startDay + " ~ " +todayList[position].endMonth +"-"+todayList[position].endDay
         holder.itemView.deadLine.text = str
         holder.itemView.taskName.text = todayList[position].taskName
