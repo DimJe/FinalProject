@@ -13,6 +13,7 @@ class TaskViewWithList : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_view_with_list)
+        overridePendingTransition(R.anim.enter,R.anim.none)
         var tasks = intent.getSerializableExtra("data") as ArrayList<Taskinfo>
         val m = intent.getStringExtra("month")
         val d = intent.getStringExtra("day")
@@ -24,7 +25,14 @@ class TaskViewWithList : AppCompatActivity() {
         taskRecycler.apply {
 
             this.layoutManager = LinearLayoutManager(this@TaskViewWithList,LinearLayoutManager.VERTICAL,false)
-            this.adapter = ListViewAdapter(tasks)
+            this.adapter = ListViewAdapter(tasks,context)
+        }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        if(isFinishing){
+            overridePendingTransition(R.anim.none,R.anim.exit)
         }
     }
 }

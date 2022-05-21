@@ -127,7 +127,6 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
             if(dayTask[position].isNotEmpty()){
                 dayTask[position].forEach {
                     Log.d(TAG, "ssss: ${it.taskName} ")
-                    Toast.makeText(mainActivity, "${it.taskName}", Toast.LENGTH_SHORT).show()
                 }
             }
             val intent = Intent(mainActivity,TaskViewWithList::class.java).apply {
