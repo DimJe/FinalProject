@@ -39,34 +39,58 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate: called")
         val sharedPreferences = getSharedPreferences("token",MODE_PRIVATE)
         val key = sharedPreferences.getString("key","")
+        val editor = sharedPreferences.edit()
+        var tokenNew : String? = ""
+        Log.d(TAG, "토큰이 저장 됨?:  ${tokenNew}")
         Log.d(TAG, "onCreate: ${key}")
         if(key.equals("")){
             api.getKey()
         }
+        if(sharedPreferences.getBoolean("auto",false)){
+            val id = sharedPreferences.getString("id","null")
+            val pw = sharedPreferences.getString("pw","null")
+            tokenNew = sharedPreferences.getString("token","null")
+            api.getTask(id!!,pw!!,tokenNew!!)
+            val intent = Intent(this, TaskViewWithCal::class.java)
+            startActivity(intent)
+        }
         api.keyString.observe(this,{
             Log.d(TAG, "keyString:  ${it} ")
-            val editor = sharedPreferences.edit()
             editor.putString("key", it)
             editor.commit()
         })
         login.setOnClickListener {
-            Log.d(TAG, "onCreate: login click")
-            if (checked.isChecked) {
-                Log.d(TAG, "login-data is saved")
+            if(user.text.toString()=="" || password.text.toString()==""){
+                Log.d(TAG, "onCreate: login click1")
+                Toast.makeText(this, "학번과 패스워드를 입력해주세요", Toast.LENGTH_SHORT).show()
             }
-            var tokenNew = sharedPreferences.getString("token","null")
-            val str = sharedPreferences.getString("key","null")
-            val ukeySpec = X509EncodedKeySpec(Base64.getDecoder().decode(str!!.toByteArray()))
-            val keyFactory = KeyFactory.getInstance("RSA")
-            val publicKey = keyFactory.generatePublic(ukeySpec)
-            Log.d(TAG, "Publickey: ${publicKey.toString()}")
-            val cipher = Cipher.getInstance("RSA")
-            cipher.init(Cipher.ENCRYPT_MODE, publicKey)
-            val encrypt = cipher.doFinal(Base64.getDecoder().decode(password.text.toString()))
-            Log.d(TAG, "암호화: ${Base64Utils.encode(encrypt)},${Base64Utils.encode(encrypt).length}")
-            api.getTask(user.text.toString(), password.text.toString(),tokenNew!!)
-            val intent = Intent(this, TaskViewWithCal::class.java)
-            startActivity(intent)
+            else{
+                Log.d(TAG, "onCreate: login click2")
+                if (checked.isChecked) {
+                    Log.d(TAG, "login-data is saved")
+                    editor.putBoolean("auto",true)
+                    editor.putString("id",user.text.toString())
+                    editor.putString("pw",password.text.toString())
+                    editor.commit()
+                }
+                else{
+                    editor.putBoolean("auto",false)
+                    editor.commit()
+                }
+                tokenNew = sharedPreferences.getString("token","null")
+                val str = sharedPreferences.getString("key","null")
+                val ukeySpec = X509EncodedKeySpec(Base64.getDecoder().decode(str!!.toByteArray()))
+                val keyFactory = KeyFactory.getInstance("RSA")
+                val publicKey = keyFactory.generatePublic(ukeySpec)
+                Log.d(TAG, "Publickey: ${publicKey.toString()}")
+                val cipher = Cipher.getInstance("RSA")
+                cipher.init(Cipher.ENCRYPT_MODE, publicKey)
+                val encrypt = cipher.doFinal(Base64.getDecoder().decode(password.text.toString()))
+                Log.d(TAG, "암호화: ${Base64Utils.encode(encrypt)},${Base64Utils.encode(encrypt).length}")
+                api.getTask(user.text.toString(), password.text.toString(),tokenNew!!)
+                val intent = Intent(this, TaskViewWithCal::class.java)
+                startActivity(intent)
+            }
         }
     }
 

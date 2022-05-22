@@ -13,9 +13,6 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
 import kotlinx.android.synthetic.main.activity_task_view_with_cal.*
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers.Main
-import kotlinx.coroutines.launch
 import org.techtown.finalproject.APIViewModel.Taskinfo
 import org.techtown.finalproject.Calendar.BaseCalendar
 import org.techtown.finalproject.Calendar.RecyclerViewAdapter
