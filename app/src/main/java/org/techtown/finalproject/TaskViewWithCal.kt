@@ -1,6 +1,7 @@
 package org.techtown.finalproject
 
 import android.app.Dialog
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
@@ -9,6 +10,7 @@ import android.os.Bundle
 import android.util.Log
 import android.view.Window
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.GridLayoutManager
@@ -58,6 +60,33 @@ class TaskViewWithCal : AppCompatActivity() {
             }
 
         })
+        logOut.setOnClickListener {
+            Log.d(TAG, "onCreate: logout-clicked")
+            var builder = AlertDialog.Builder(this)
+            builder.setTitle("로그아웃")
+            builder.setMessage("로그아웃을 하시겠습니까?")
+            builder.setIcon(R.mipmap.ic_launcher)
+
+            // 버튼 클릭시에 무슨 작업을 할 것인가!
+            var listener = object : DialogInterface.OnClickListener {
+                override fun onClick(p0: DialogInterface?, p1: Int) {
+                    when (p1) {
+                        DialogInterface.BUTTON_POSITIVE ->{
+                        }
+                        DialogInterface.BUTTON_NEGATIVE ->{
+
+                            finish()
+                        }
+
+                    }
+                }
+            }
+
+            builder.setPositiveButton("아니요", listener)
+            builder.setNegativeButton("네", listener)
+            builder.create()
+            builder.show()
+        }
 
     }
     fun initView(taskList: ArrayList<Taskinfo>) {
@@ -81,5 +110,31 @@ class TaskViewWithCal : AppCompatActivity() {
     fun refreshCurrentMonth(calendar: Calendar) {
         val sdf = SimpleDateFormat("yyyy MM", Locale.KOREAN)
         tv_current_month.text = sdf.format(calendar.time)
+    }
+
+    override fun onBackPressed() {
+        var builder = AlertDialog.Builder(this)
+        builder.setTitle("로그아웃")
+        builder.setMessage("로그아웃을 하시겠습니까?")
+        builder.setIcon(R.mipmap.ic_launcher)
+
+        // 버튼 클릭시에 무슨 작업을 할 것인가!
+        var listener = object : DialogInterface.OnClickListener {
+            override fun onClick(p0: DialogInterface?, p1: Int) {
+                when (p1) {
+                    DialogInterface.BUTTON_POSITIVE ->{
+                    }
+                    DialogInterface.BUTTON_NEGATIVE ->{
+                        finish()
+                    }
+
+                }
+            }
+        }
+
+        builder.setPositiveButton("아니요", listener)
+        builder.setNegativeButton("네", listener)
+        builder.create()
+        builder.show()
     }
 }

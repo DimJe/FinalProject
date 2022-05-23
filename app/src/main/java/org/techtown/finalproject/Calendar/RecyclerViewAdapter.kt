@@ -97,6 +97,7 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
             }
         }
         for(i in 0..5){
+//            Log.d("태그", "onBindViewHolder:  ${schedule[i].check} ")
             if(schedule[i].check && (schedule[i].startRange <= dayRange) && (dayRange <= schedule[i].endRange)){
                 dayTask[position].add(schedule[i].item!!)
                 Log.i("태그", "onBindViewHolder:왜 그려지는거야 싀발 $i ")
@@ -156,6 +157,11 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
     fun changeToNextMonth() {
         dayTask.forEach {
             it.clear()
+        }
+        schedule.forEach {
+            it.check = false
+            it.startRange = ""
+            it.endRange = ""
         }
         baseCalendar.changeToNextMonth {
             refreshView(it)

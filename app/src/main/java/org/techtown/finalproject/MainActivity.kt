@@ -66,6 +66,7 @@ class MainActivity : AppCompatActivity() {
             }
             else{
                 Log.d(TAG, "onCreate: login click2")
+                Log.d(TAG, "onCreate: ${password.text.toString()}")
                 if (checked.isChecked) {
                     Log.d(TAG, "login-data is saved")
                     editor.putBoolean("auto",true)
@@ -78,15 +79,15 @@ class MainActivity : AppCompatActivity() {
                     editor.commit()
                 }
                 tokenNew = sharedPreferences.getString("token","null")
-                val str = sharedPreferences.getString("key","null")
-                val ukeySpec = X509EncodedKeySpec(Base64.getDecoder().decode(str!!.toByteArray()))
-                val keyFactory = KeyFactory.getInstance("RSA")
-                val publicKey = keyFactory.generatePublic(ukeySpec)
-                Log.d(TAG, "Publickey: ${publicKey.toString()}")
-                val cipher = Cipher.getInstance("RSA")
-                cipher.init(Cipher.ENCRYPT_MODE, publicKey)
-                val encrypt = cipher.doFinal(Base64.getDecoder().decode(password.text.toString()))
-                Log.d(TAG, "암호화: ${Base64Utils.encode(encrypt)},${Base64Utils.encode(encrypt).length}")
+//                val str = sharedPreferences.getString("key","null")
+//                val ukeySpec = X509EncodedKeySpec(Base64.getDecoder().decode(str!!.toByteArray()))
+//                val keyFactory = KeyFactory.getInstance("RSA")
+//                val publicKey = keyFactory.generatePublic(ukeySpec)
+//                Log.d(TAG, "Publickey: ${publicKey.toString()}")
+//                val cipher = Cipher.getInstance("RSA")
+//                cipher.init(Cipher.ENCRYPT_MODE, publicKey)
+//                val encrypt = cipher.doFinal(Base64.getDecoder().decode(password.text.toString()))
+//                Log.d(TAG, "암호화: ${Base64Utils.encode(encrypt)},${Base64Utils.encode(encrypt).length}")
                 api.getTask(user.text.toString(), password.text.toString(),tokenNew!!)
                 val intent = Intent(this, TaskViewWithCal::class.java)
                 startActivity(intent)
@@ -100,7 +101,9 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onRestart: called")
         user.text.clear()
         password.text.clear()
-        api.data.value!!.clear()
+        if(api.data.hasObservers()) {
+            api.data.value!!.clear()
+        }
         dayTask.forEach {
             it.clear()
         }

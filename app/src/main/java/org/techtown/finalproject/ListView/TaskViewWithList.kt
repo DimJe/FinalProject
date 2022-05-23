@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.recyclerview.widget.LinearLayoutManager
+import kotlinx.android.synthetic.main.activity_task_view_with_cal.*
 import kotlinx.android.synthetic.main.activity_task_view_with_list.*
 import org.techtown.finalproject.APIViewModel.Taskinfo
 import org.techtown.finalproject.MainActivity.Companion.TAG
