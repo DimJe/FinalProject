@@ -30,11 +30,9 @@ class ListViewAdapter(val todayList: ArrayList<Taskinfo>,val context:Context): R
         date.time = Date()
         if(date.time.month+1==todayList[position].endMonth){
             if(todayList[position].endDay-date.time.date<=3){
-                Log.d(TAG, "onBindViewHolder: 응애")
                 holder.itemView.list_item_task.setBackgroundColor(Color.argb(50,255,0,0))
             }
             else if(todayList[position].endDay-date.time.date<=5){
-                Log.d(TAG, "onBindViewHolder: 응애2")
                 holder.itemView.list_item_task.setBackgroundColor(Color.argb(50,255,235,59))
             }
         }

@@ -1,6 +1,5 @@
 package org.techtown.finalproject.APIViewModel
 
-//import com.google.api.client.util.PemReader
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -26,7 +25,6 @@ class ApiViewModel : ViewModel() {
 
     var retrofit : Retrofit
     var data : MutableLiveData<ArrayList<Taskinfo>> = MutableLiveData()
-    var keyString : MutableLiveData<String> = MutableLiveData()
     var temp = ArrayList<Taskinfo>()
     var temp2 = ArrayList<Taskinfo>()
     init {
@@ -54,6 +52,7 @@ class ApiViewModel : ViewModel() {
                 temp.clear()
                 temp2.clear()
                 if(response.isSuccessful){
+                    Log.d(TAG, "onResponse: 11")
                     response.body()!!.task.forEach{
                         temp.add(Taskinfo(it.d_day_start,it.d_day_end,it.title,it.course,it.content,it.professor))
                     }
@@ -91,52 +90,5 @@ class ApiViewModel : ViewModel() {
             }
         })
     }
-    fun getKey(){
-        val api = retrofit.create(GetTaskData::class.java)
-        Log.d(TAG, "post: called")
-        val result = api.getDate()
-        result.enqueue(object : Callback<String>{
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                Log.d(TAG, "post-response:${response.body()!!} ")
-                var key = response.body()!!
-                var re = "\\n".toRegex()
-                key = response.body()!!.replace(re, "").replace("-----BEGIN PUBLIC KEY-----", "")
-                    .replace("-----END PUBLIC KEY-----", "")
-                val text = "981008"
-                keyString.value = key
-//                val ukeySpec = X509EncodedKeySpec(Base64.getDecoder().decode(key.toByteArray()))
-//                val keyFactory = KeyFactory.getInstance("RSA")
-//                val publicKey = keyFactory.generatePublic(ukeySpec)
-//                Log.d(TAG, "publickey: ${publicKey} ")
-//                val cipher = Cipher.getInstance("RSA")
-//                cipher.init(Cipher.ENCRYPT_MODE, publicKey)
-//                val encrypt = cipher.doFinal(Base64.getDecoder().decode(text.toByteArray()))
-//                Log.d(TAG, "onResponse: ${Base64Utils.encode(encrypt)}")
 
-//                val text = "981008"
-//                val ukeySpec = X509EncodedKeySpec(Base64.getDecoder().decode(key.toByteArray()))
-//                val keyFactory = KeyFactory.getInstance("RSA")
-//                Log.d(TAG, "여긴 실행됨?? 몰루 시발: ")
-//                try {
-//                    val publicKey = keyFactory.generatePublic(ukeySpec)
-//                    val cipher = Cipher.getInstance("RSA")
-//                    cipher.init(Cipher.ENCRYPT_MODE, publicKey)
-//                    val encrypt = cipher.doFinal(text.toByteArray())
-//                    Log.d(TAG, "onResponse: ${Base64Utils.encode(encrypt)}")
-//                    //Log.d(TAG, "onResponse: $key")
-//                    Log.d(TAG, "onResponse: $text")
-//                }catch (e : InvalidKeyException){
-//                    Log.d(TAG, "onResponse: ${e.message}")
-//                }
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                Log.d(TAG,"CallAPI - onFailure() called ${t.localizedMessage}")
-            }
-
-        })
-    }
-//    private fun String.fromX509toKeySpec(): X509EncodedKeySpec {
-//        return X509EncodedKeySpec(PemReader.readFirstSectionAndClose(StringReader(this)).base64DecodedBytes)
-//    }
 }

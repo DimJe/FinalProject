@@ -62,6 +62,7 @@ class TaskViewWithCal : AppCompatActivity() {
         })
         logOut.setOnClickListener {
             Log.d(TAG, "onCreate: logout-clicked")
+
             var builder = AlertDialog.Builder(this)
             builder.setTitle("로그아웃")
             builder.setMessage("로그아웃을 하시겠습니까?")
@@ -74,7 +75,10 @@ class TaskViewWithCal : AppCompatActivity() {
                         DialogInterface.BUTTON_POSITIVE ->{
                         }
                         DialogInterface.BUTTON_NEGATIVE ->{
-
+                            val sharedPreferences = getSharedPreferences("token",MODE_PRIVATE)
+                            val editor = sharedPreferences.edit()
+                            editor.putBoolean("auto",false)
+                            editor.apply()
                             finish()
                         }
 
