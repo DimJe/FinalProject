@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/item_day_layout"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
+    android:layout_height="100dp"
     android:gravity="center"
     android:orientation="vertical"
     android:weightSum="7">
@@ -21,7 +21,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible"
-        android:background="#A4FF1100"
+        android:background="#80FF1100"
         android:maxLines="1"
         android:textSize="10sp"
         />
@@ -31,7 +31,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible"
-        android:background="#AEFF8500"
+        android:background="#80FF8500"
         android:maxLines="1"
         android:textSize="10sp"
         />
@@ -41,7 +41,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible"
-        android:background="#B0FFEB3B"
+        android:background="#80FFEB3B"
         android:maxLines="1"
         android:textSize="10sp"
         />
@@ -51,7 +51,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible"
-        android:background="#B500FF0A"
+        android:background="#8000FF0A"
         android:maxLines="1"
         android:textSize="10sp"
         />
@@ -61,7 +61,7 @@
         android:layout_height="0dp"
         android:layout_weight="1"
         android:visibility="invisible"
-        android:background="#B5005EFF"
+        android:background="#80005EFF"
         android:maxLines="1"
         android:textSize="10sp"
         />
@@ -71,7 +71,7 @@
         android:layout_height="0dp"
         android:visibility="invisible"
         android:layout_weight="1"
-        android:background="#B29D00FF"
+        android:background="#809D00FF"
         android:maxLines="1"
         android:textSize="10sp"
         />
