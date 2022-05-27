@@ -23,7 +23,6 @@ class ListViewAdapter(val todayList: ArrayList<Taskinfo>,val context:Context): R
         return ViewHolderHelper(view)
     }
 
-    @SuppressLint("ResourceAsColor")
     override fun onBindViewHolder(holder: ViewHolderHelper, position: Int) {
 
         val date = Calendar.getInstance()

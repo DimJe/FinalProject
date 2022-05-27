@@ -59,10 +59,13 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
             it!!.visibility = View.INVISIBLE
         }
 
+        if(baseCalendar.nowMonth==baseCalendar.month && baseCalendar.nowDate==baseCalendar.data[position]){
+            holder.itemView.setBackgroundResource(R.drawable.round)
+        }
+        
         val dayRange : String = baseCalendar.month.toString()+
                 if(baseCalendar.data[position].toString().length==1) "0"+ baseCalendar.data[position].toString() else baseCalendar.data[position].toString()
 
-        Log.i("태그", "onBindViewHolder:  ${baseCalendar.data[position]} ${baseCalendar.month}")
         when {
             position % BaseCalendar.DAYS_OF_WEEK == 0 -> holder.itemView.item_day_text.setTextColor(Color.parseColor("#ff1200"))
             position % BaseCalendar.DAYS_OF_WEEK == 6 -> holder.itemView.item_day_text.setTextColor(Color.BLUE)
@@ -97,11 +100,8 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
             }
         }
         for(i in 0..5){
-//            Log.d("태그", "onBindViewHolder:  ${schedule[i].check} ")
             if(schedule[i].check && (schedule[i].startRange <= dayRange) && (dayRange <= schedule[i].endRange)){
                 dayTask[position].add(schedule[i].item!!)
-                Log.i("태그", "onBindViewHolder:왜 그려지는거야 싀발 $i ")
-                //Log.d(TAG, "schedule : $i")
                 scheduleList[i]!!.visibility = View.VISIBLE
                 if(schedule[i].title.length>8) {
                     scheduleList[i]!!.text = schedule[i].title.substring(0 until 8)
@@ -115,21 +115,14 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
         }
         taskList.forEach {
             if (it.endMonth-1==baseCalendar.month && it.endDay==baseCalendar.data[position]){
-                Log.i("태그", "과제 마감")
                 schedule[it.taskLine].check = false
                 schedule[it.taskLine].startRange = ""
                 schedule[it.taskLine].endRange = ""
                 schedule[it.taskLine].title = ""
                 schedule[it.taskLine].item = null
-                //it.taskLine = -1
             }
         }
         holder.itemView.setOnClickListener{
-            if(dayTask[position].isNotEmpty()){
-                dayTask[position].forEach {
-                    Log.d(TAG, "ssss: ${it.taskName} ")
-                }
-            }
             val intent = Intent(mainActivity,TaskViewWithList::class.java).apply {
                 putExtra("data", dayTask[position])
                 putExtra("month",(baseCalendar.month+1).toString())

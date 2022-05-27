@@ -22,10 +22,14 @@ class BaseCalendar {
 
     var data = arrayListOf<Int>()
     var month : Int = -1
+    var nowMonth = -1
+    var nowDate = -1
 
     init {
         calendar.time = Date()
         month = calendar.time.month
+        nowMonth = month
+        nowDate = calendar.time.date
     }
 
     /**

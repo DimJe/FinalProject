@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.Window
+import android.view.WindowManager
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.lifecycle.Observer
@@ -26,20 +27,20 @@ import kotlin.collections.ArrayList
 
 class TaskViewWithCal : AppCompatActivity() {
     lateinit var scheduleRecyclerViewAdapter: RecyclerViewAdapter
-    //val loading = LoadingDialog(this)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_task_view_with_cal)
-
+        window.addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         val dialog = Dialog(this)
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
         dialog.setContentView(R.layout.loading)
-        dialog.setCancelable(true)
+        dialog.setCancelable(false)
         dialog.window!!.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
         dialog.show()
 
         api.data.observe(this, Observer{
             Log.d(TAG, "observe : called ")
+            window.clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
             if(api.data.value!!.isEmpty()){
             }
             else if(it[0].startMonth==66){
@@ -66,28 +67,28 @@ class TaskViewWithCal : AppCompatActivity() {
             var builder = AlertDialog.Builder(this)
             builder.setTitle("로그아웃")
             builder.setMessage("로그아웃을 하시겠습니까?")
-            builder.setIcon(R.mipmap.ic_launcher)
+            builder.setIcon(R.drawable.logo)
 
             // 버튼 클릭시에 무슨 작업을 할 것인가!
             var listener = object : DialogInterface.OnClickListener {
                 override fun onClick(p0: DialogInterface?, p1: Int) {
                     when (p1) {
                         DialogInterface.BUTTON_POSITIVE ->{
-                        }
-                        DialogInterface.BUTTON_NEGATIVE ->{
                             val sharedPreferences = getSharedPreferences("token",MODE_PRIVATE)
                             val editor = sharedPreferences.edit()
                             editor.putBoolean("auto",false)
                             editor.apply()
                             finish()
                         }
+                        DialogInterface.BUTTON_NEGATIVE ->{
+                        }
 
                     }
                 }
             }
 
-            builder.setPositiveButton("아니요", listener)
-            builder.setNegativeButton("네", listener)
+            builder.setPositiveButton("네", listener)
+            builder.setNegativeButton("아니요", listener)
             builder.create()
             builder.show()
         }
@@ -120,24 +121,28 @@ class TaskViewWithCal : AppCompatActivity() {
         var builder = AlertDialog.Builder(this)
         builder.setTitle("로그아웃")
         builder.setMessage("로그아웃을 하시겠습니까?")
-        builder.setIcon(R.mipmap.ic_launcher)
+        builder.setIcon(R.drawable.logo)
 
         // 버튼 클릭시에 무슨 작업을 할 것인가!
         var listener = object : DialogInterface.OnClickListener {
             override fun onClick(p0: DialogInterface?, p1: Int) {
                 when (p1) {
                     DialogInterface.BUTTON_POSITIVE ->{
+                        val sharedPreferences = getSharedPreferences("token",MODE_PRIVATE)
+                        val editor = sharedPreferences.edit()
+                        editor.putBoolean("auto",false)
+                        editor.apply()
+                        finish()
                     }
                     DialogInterface.BUTTON_NEGATIVE ->{
-                        finish()
                     }
 
                 }
             }
         }
 
-        builder.setPositiveButton("아니요", listener)
-        builder.setNegativeButton("네", listener)
+        builder.setPositiveButton("네", listener)
+        builder.setNegativeButton("아니요", listener)
         builder.create()
         builder.show()
     }

@@ -40,7 +40,6 @@ class MainActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("token",MODE_PRIVATE)
         val editor = sharedPreferences.edit()
         var tokenNew : String? = ""
-        Log.d(TAG, "토큰이 저장 됨?:  ${tokenNew}")
         if(sharedPreferences.getBoolean("auto",false)){
             val id = sharedPreferences.getString("id","null")
             val pw = sharedPreferences.getString("pw","null")
@@ -52,12 +51,9 @@ class MainActivity : AppCompatActivity() {
 
         login.setOnClickListener {
             if(user.text.toString()=="" || password.text.toString()==""){
-                Log.d(TAG, "onCreate: login click1")
                 Toast.makeText(this, "학번과 패스워드를 입력해주세요", Toast.LENGTH_SHORT).show()
             }
             else{
-                Log.d(TAG, "onCreate: login click2")
-                Log.d(TAG, "onCreate: ${password.text.toString()}")
                 if (checked.isChecked) {
                     Log.d(TAG, "login-data is saved")
                     editor.putBoolean("auto",true)
@@ -69,7 +65,6 @@ class MainActivity : AppCompatActivity() {
                     editor.putBoolean("auto",false)
                     editor.apply()
                     editor.commit()
-                    Log.d(TAG, "shared: ${sharedPreferences.getBoolean("auto",true)}")
                 }
                 tokenNew = sharedPreferences.getString("token","null")
                 api.getTask(user.text.toString(), password.text.toString(),tokenNew!!)

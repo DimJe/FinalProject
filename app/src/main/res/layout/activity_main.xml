@@ -5,46 +5,82 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:weightSum="10"
     tools:context=".MainActivity">
 
-    <ImageView
-        android:layout_marginTop="50dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:src="@drawable/ic_launcher_foreground" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textStyle="italic"
+        android:fontFamily="@font/fondamento"
+        android:background="@drawable/background_top"
+        android:gravity="center"
+        android:text="Hello Wonju-University"
+        android:textColor="#000000"
+        android:textSize="25sp" />
 
-    <EditText
-        android:id="@+id/user"
-        android:inputType="number"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:ems="12"
-        android:hint="학번을 입력하세요" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:layout_weight="3">
 
-    <EditText
-        android:inputType="textPassword"
-        android:id="@+id/password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:ems="12"
-        android:hint="패스워드를 입력하세요" />
+        <ImageView
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:src="@drawable/logo" />
 
-    <CheckBox
-        android:id="@+id/checked"
-        android:layout_gravity="center"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="로그인정보 기억하기"/>
+    </LinearLayout>
 
-    <Button
-        android:id="@+id/login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="LOGIN" />
+    <LinearLayout
+        android:background="@drawable/background_top"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:orientation="vertical">
+
+        <EditText
+            android:paddingLeft="15dp"
+            android:layout_marginTop="30dp"
+            android:id="@+id/user"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/backgroud_edit"
+            android:ems="12"
+            android:hint=" 학번을 입력하세요"
+            android:inputType="number" />
+
+        <EditText
+            android:paddingLeft="15dp"
+            android:id="@+id/password"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="10dp"
+            android:background="@drawable/backgroud_edit"
+            android:ems="12"
+            android:hint="패스워드를 입력하세요"
+            android:inputType="textPassword" />
+
+        <CheckBox
+            android:id="@+id/checked"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="로그인정보 기억하기" />
+
+        <Button
+            android:id="@+id/login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@drawable/background_btn"
+            android:text="LOGIN" />
+
+    </LinearLayout>
+
 
 
 </LinearLayout>

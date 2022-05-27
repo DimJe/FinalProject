@@ -19,10 +19,7 @@ class TaskViewWithList : AppCompatActivity() {
         val m = intent.getStringExtra("month")
         val d = intent.getStringExtra("day")
         tasks.sortWith(compareBy<Taskinfo>{it.endMonth}.thenBy { it.endDay })
-        tasks.forEach {
-            Log.d(TAG, "onCreate: ${it.endMonth},${it.endDay}")
-        }
-        monthDay.text = m + "월 " + d + "일의 할 일"
+        monthDay.text = "ToDo List at " +m+"."+d
         taskRecycler.apply {
 
             this.layoutManager = LinearLayoutManager(this@TaskViewWithList,LinearLayoutManager.VERTICAL,false)

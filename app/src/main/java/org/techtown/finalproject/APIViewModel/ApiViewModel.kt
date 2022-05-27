@@ -41,7 +41,6 @@ class ApiViewModel : ViewModel() {
     }
     @OptIn(ExperimentalTime::class)
     fun getTask(id:String, pw:String,token:String){
-        Log.d(TAG, "getTask: $pw")
         var mark = TimeSource.Monotonic.markNow()
         val api = retrofit.create(GetTaskData::class.java)
         Log.d(TAG, "getTask: called")
@@ -52,7 +51,6 @@ class ApiViewModel : ViewModel() {
                 temp.clear()
                 temp2.clear()
                 if(response.isSuccessful){
-                    Log.d(TAG, "onResponse: 11")
                     response.body()!!.task.forEach{
                         temp.add(Taskinfo(it.d_day_start,it.d_day_end,it.title,it.course,it.content,it.professor))
                     }
@@ -60,7 +58,6 @@ class ApiViewModel : ViewModel() {
                         temp.add(Taskinfo("6666-66-66","6666-66-66","","","",""))
                     }
                     temp.forEach {
-                        Log.d(TAG, "onResponse: ${it.taskName}")
                         if (it.startMonth != it.endMonth){
                             val cal = Calendar.getInstance()
                             cal.time = Date()
@@ -68,7 +65,6 @@ class ApiViewModel : ViewModel() {
                             val end : Int = cal.getActualMaximum(Calendar.DAY_OF_MONTH)
                             val str : String = it.startYear.toString() + if(it.startMonth+1>9) "-"+(it.startMonth+1).toString() else "-0"+(it.startMonth+1).toString() + "-" + "01"
                             val str2 : String = it.startYear.toString() + if(it.endMonth>9) "-" else "-0"+(it.endMonth).toString() + if(it.endDay>9) "-"+it.endDay.toString() else "-0" + (it.endDay).toString()
-                            Log.d(TAG, "$str  $str2")
                             temp2.add(Taskinfo(str,str2,it.taskName,it.course,it.content,it.professor))
                             it.endDay = end
                             it.endMonth = it.startMonth
