@@ -4,5 +4,8 @@
     <font android:fontStyle="normal"
         android:fontWeight="400"
         android:font="@font/fondamento1"/>
+    <font android:fontStyle="normal"
+        android:fontWeight="400"
+        android:font="@font/freckleface"/>
 
 </font-family>

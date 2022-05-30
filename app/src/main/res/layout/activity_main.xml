@@ -12,48 +12,48 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:textStyle="italic"
-        android:fontFamily="@font/fondamento"
         android:background="@drawable/background_top"
+        android:fontFamily="@font/fondamento"
         android:gravity="center"
         android:text="Hello Wonju-University"
         android:textColor="#000000"
-        android:textSize="25sp" />
+        android:textSize="30sp"
+        android:textStyle="italic|bold" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:gravity="center"
-        android:layout_weight="3">
+        android:layout_weight="2.3"
+        android:background="@color/white"
+        android:gravity="center">
 
         <ImageView
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/logo" />
+            android:src="@drawable/logo3" />
 
     </LinearLayout>
 
     <LinearLayout
-        android:background="@drawable/background_top"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
+        android:layout_weight="3.7"
+        android:background="@drawable/background_top"
         android:orientation="vertical">
 
         <EditText
-            android:paddingLeft="15dp"
-            android:layout_marginTop="30dp"
             android:id="@+id/user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginTop="30dp"
             android:background="@drawable/backgroud_edit"
             android:ems="12"
             android:hint=" 학번을 입력하세요"
-            android:inputType="number" />
+            android:inputType="number"
+            android:paddingLeft="15dp" />
 
         <EditText
-            android:paddingLeft="15dp"
             android:id="@+id/password"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -62,7 +62,8 @@
             android:background="@drawable/backgroud_edit"
             android:ems="12"
             android:hint="패스워드를 입력하세요"
-            android:inputType="textPassword" />
+            android:inputType="textPassword"
+            android:paddingLeft="15dp" />
 
         <CheckBox
             android:id="@+id/checked"
@@ -81,6 +82,61 @@
 
     </LinearLayout>
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.6"
+        android:gravity="center"
+        android:orientation="horizontal">
 
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/main1" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/main2" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/main5" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="30dp"
+            android:src="@drawable/main4" />
+
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="match_parent"
+            android:src="@drawable/main3" />
+
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="2.4"
+        android:background="#A1C7FEA5">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fontFamily="@font/freckleface"
+            android:gravity="center"
+            android:text="Time doesn't wait,\nNore does the task"
+            android:textColor="@color/black"
+            android:textSize="30sp" />
+
+
+    </LinearLayout>
 
 </LinearLayout>
