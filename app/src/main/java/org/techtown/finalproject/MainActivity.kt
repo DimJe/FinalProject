@@ -1,27 +1,19 @@
 package org.techtown.finalproject
 
+import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
-import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
-import com.google.android.gms.common.util.Base64Utils
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 import org.techtown.finalproject.APIViewModel.ApiViewModel
 import org.techtown.finalproject.APIViewModel.Taskinfo
 import org.techtown.finalproject.Calendar.ScheduleItem
-import java.security.InvalidKeyException
-import java.security.KeyFactory
-import java.security.PublicKey
-import java.security.spec.X509EncodedKeySpec
 import java.util.*
-import javax.crypto.Cipher
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
@@ -72,6 +64,9 @@ class MainActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+        main.setOnClickListener {
+            if(currentFocus != null) HideKeyBoard()
+        }
     }
 
 
@@ -86,6 +81,14 @@ class MainActivity : AppCompatActivity() {
         dayTask.forEach {
             it.clear()
         }
+    }
+    fun HideKeyBoard(){
+        val inputManager: InputMethodManager =
+            this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        inputManager.hideSoftInputFromWindow(
+            this.currentFocus!!.windowToken,
+            InputMethodManager.HIDE_NOT_ALWAYS
+        )
     }
 
 }

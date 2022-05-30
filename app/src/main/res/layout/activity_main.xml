@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:weightSum="10"
+    android:id="@+id/main"
     tools:context=".MainActivity">
 
     <TextView
@@ -28,9 +29,10 @@
         android:gravity="center">
 
         <ImageView
+            android:transitionName="temp"
             android:layout_width="150dp"
             android:layout_height="150dp"
-            android:src="@drawable/logo3" />
+            android:src="@drawable/splash" />
 
     </LinearLayout>
 

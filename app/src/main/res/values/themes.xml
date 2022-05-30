@@ -13,5 +13,12 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <item name="android:windowLightStatusBar" tools:targetApi="m">true</item>
         <!-- Customize your theme here. -->
+
+        <item name="android:windowContentTransitions">true</item>
+        // 액티비티 내의 뷰들이 Transition이 가능하도록 한다
+        <item name="android:windowSharedElementEnterTransition">@transition/splashout</item>
+        // 액티비티 이동 시 입장 애니메이션
+        <item name="android:windowSharedElementExitTransition">@transition/splashout</item>
+        // 액티비티 이동 시 퇴장 애니메이션
     </style>
 </resources>
