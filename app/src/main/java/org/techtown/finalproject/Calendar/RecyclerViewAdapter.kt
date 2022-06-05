@@ -6,13 +6,10 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
-import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item_day.view.*
 import org.techtown.finalproject.APIViewModel.Taskinfo
 import org.techtown.finalproject.ListView.TaskViewWithList
-import org.techtown.finalproject.MainActivity.Companion.TAG
 import org.techtown.finalproject.MainActivity.Companion.dayTask
 import org.techtown.finalproject.MainActivity.Companion.scheduleList
 import org.techtown.finalproject.R
@@ -123,7 +120,7 @@ class RecyclerViewAdapter(val mainActivity: TaskViewWithCal, var taskList: Array
             }
         }
         holder.itemView.setOnClickListener{
-            val intent = Intent(mainActivity,TaskViewWithList::class.java).apply {
+            Intent(mainActivity,TaskViewWithList::class.java).apply {
                 putExtra("data", dayTask[position])
                 putExtra("month",(baseCalendar.month+1).toString())
                 putExtra("day",baseCalendar.data[position].toString())

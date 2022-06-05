@@ -5,25 +5,21 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.TextView
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 import org.techtown.finalproject.APIViewModel.ApiViewModel
 import org.techtown.finalproject.APIViewModel.Taskinfo
-import org.techtown.finalproject.Calendar.ScheduleItem
-import java.util.*
 import kotlin.collections.ArrayList
 
 class MainActivity : AppCompatActivity() {
 
     companion object{
         val api = ApiViewModel()
-        val TAG: String = "로그"
-        val lineColor = arrayOfNulls<Int>(6)
+        const val TAG: String = "로그"
         val scheduleList = arrayOfNulls<TextView>(6)
-        var dayTask = Array<ArrayList<Taskinfo>>(42){ArrayList<Taskinfo>()}
+        var dayTask = Array(42){ArrayList<Taskinfo>()}
     }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,12 +27,15 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onCreate: called")
         val sharedPreferences = getSharedPreferences("token",MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        var tokenNew : String? = ""
+        var tokenNew: String?
         if(sharedPreferences.getBoolean("auto",false)){
             val id = sharedPreferences.getString("id","null")
+            Log.d(TAG, "id: ${id}")
             val pw = sharedPreferences.getString("pw","null")
+            Log.d(TAG, "pw: ${pw}")
             tokenNew = sharedPreferences.getString("token","null")
-            api.getTask(id!!,pw!!,tokenNew!!)
+            Log.d(TAG, "token: ${tokenNew}")
+            api.getTask(id.toString(),pw.toString(), tokenNew!!)
             val intent = Intent(this, TaskViewWithCal::class.java)
             startActivity(intent)
         }
@@ -51,7 +50,7 @@ class MainActivity : AppCompatActivity() {
                     editor.putBoolean("auto",true)
                     editor.putString("id",user.text.toString())
                     editor.putString("pw",password.text.toString())
-                    editor.commit()
+                    editor.apply()
                 }
                 else{
                     editor.putBoolean("auto",false)
@@ -65,7 +64,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         main.setOnClickListener {
-            if(currentFocus != null) HideKeyBoard()
+            if(currentFocus != null) hideKeyBoard()
         }
     }
 
@@ -75,14 +74,11 @@ class MainActivity : AppCompatActivity() {
         Log.d(TAG, "onRestart: called")
         user.text.clear()
         password.text.clear()
-        if(api.data.hasObservers()) {
-            api.data.value!!.clear()
-        }
         dayTask.forEach {
             it.clear()
         }
     }
-    fun HideKeyBoard(){
+    private fun hideKeyBoard(){
         val inputManager: InputMethodManager =
             this.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         inputManager.hideSoftInputFromWindow(

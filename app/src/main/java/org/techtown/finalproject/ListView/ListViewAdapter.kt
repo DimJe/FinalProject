@@ -1,9 +1,7 @@
 package org.techtown.finalproject.ListView
 
-import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,12 +10,11 @@ import androidx.recyclerview.widget.RecyclerView
 import kotlinx.android.synthetic.main.list_item_task.view.*
 import org.techtown.finalproject.APIViewModel.Taskinfo
 import org.techtown.finalproject.Calendar.ViewHolderHelper
-import org.techtown.finalproject.MainActivity.Companion.TAG
 import org.techtown.finalproject.R
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ListViewAdapter(val todayList: ArrayList<Taskinfo>,val context:Context): RecyclerView.Adapter<ViewHolderHelper>()  {
+class ListViewAdapter(private val todayList: ArrayList<Taskinfo>, val context:Context): RecyclerView.Adapter<ViewHolderHelper>()  {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolderHelper {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.list_item_task, parent, false)
         return ViewHolderHelper(view)

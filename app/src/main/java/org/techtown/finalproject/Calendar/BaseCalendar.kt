@@ -58,13 +58,13 @@ class BaseCalendar {
      * Change to next month.
      */
     fun changeToNextMonth(refreshCallback: (Calendar) -> Unit) {
-        if(calendar.get(Calendar.MONTH) == Calendar.DECEMBER){
+        month = if(calendar.get(Calendar.MONTH) == Calendar.DECEMBER){
             calendar.set(Calendar.YEAR, calendar.get(Calendar.YEAR) + 1)
             calendar.set(Calendar.MONTH, 0)
-            month = 0
+            0
         }else {
             calendar.set(Calendar.MONTH, calendar.get(Calendar.MONTH) + 1)
-            month = calendar.time.month
+            calendar.time.month
         }
         makeMonthDate(refreshCallback)
     }

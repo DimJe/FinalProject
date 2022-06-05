@@ -12,43 +12,61 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:gravity="center">
+        android:background="#c7f2a5"
+        android:gravity="center"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp">
 
-        <TextView
+        <ImageButton
             android:id="@+id/tv_prev_month"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginLeft="80dp"
-            android:layout_marginRight="30dp"
+            android:layout_marginLeft="80sp"
+            android:layout_marginRight="30sp"
+            android:background="@android:color/transparent"
             android:gravity="center"
-            android:text="  PREV  "
-            android:textSize="15dp" />
+            android:rotation="180"
+            android:src="@drawable/arrow" />
+
+        <ImageView
+            android:id="@+id/cal_image"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginRight="30sp"
+            android:layout_toRightOf="@id/tv_prev_month"
+            android:background="@android:color/transparent"
+            android:src="@drawable/calendar" />
 
         <TextView
             android:id="@+id/tv_current_month"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginRight="30dp"
-            android:layout_toRightOf="@id/tv_prev_month"
+            android:layout_marginRight="30sp"
+            android:layout_toRightOf="@id/cal_image"
+            android:fontFamily="@font/freckleface"
             android:gravity="center"
-            android:text="2019  03"
-            android:textSize="20dp" />
+            android:text="May"
+            android:textColor="@color/black"
+            android:textSize="25dp"
+            android:textStyle="bold" />
 
-        <TextView
+        <ImageButton
             android:id="@+id/tv_next_month"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_toRightOf="@id/tv_current_month"
+            android:background="@android:color/transparent"
             android:gravity="center"
-            android:text="  NEXT  "
-            android:textSize="15dp" />
+            android:src="@drawable/arrow" />
 
         <ImageButton
             android:id="@+id/logOut"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentRight="true"
-            android:layout_marginRight="15dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="13dp"
+            android:layout_marginBottom="1dp"
             android:background="@android:color/transparent"
             android:src="@drawable/logout" />
     </RelativeLayout>
@@ -139,6 +157,7 @@
         </LinearLayout>
 
     </LinearLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_schedule"
         android:layout_width="match_parent"

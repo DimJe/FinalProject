@@ -17,7 +17,6 @@ import org.techtown.finalproject.MainActivity.Companion.TAG
 class MyFirebaseMessagingService : FirebaseMessagingService() {
     override fun onNewToken(token: String) {
         Log.d(TAG, "new Token: $token")
-
         // 토큰 값을 따로 저장해둔다.
         val pref = this.getSharedPreferences("token", Context.MODE_PRIVATE)
         val editor = pref.edit()
@@ -28,11 +27,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
-        Log.d(TAG, "From: " + message!!.from)
-
-        // Notification 메시지를 수신할 경우는
-        // remoteMessage.notification?.body!! 여기에 내용이 저장되어있다.
-        // Log.d(TAG, "Notification Message Body: " + remoteMessage.notification?.body!!)
+        Log.d(TAG, "From: " + message.from)
 
         if(message.data.isNotEmpty()){
             Log.d(TAG, message.data["body"].toString())
@@ -47,7 +42,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
     }
 
     private fun sendNotification(remoteMessage: RemoteMessage) {
-        // RequestCode, Id를 고유값으로 지정하여 알림이 개별 표시되도록 함
         val uniId: Int = (System.currentTimeMillis() / 7).toInt()
 
         // 일회용 PendingIntent
@@ -58,10 +52,8 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         // 알림 채널 이름
         val channelId = "Push"
-
         // 알림 소리
         val soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION)
-
         // 알림에 대한 UI 정보와 작업을 지정한다.
         val notificationBuilder = NotificationCompat.Builder(this, channelId)
             .setSmallIcon(R.drawable.logo) // 아이콘 설정
@@ -79,7 +71,6 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             val channel = NotificationChannel(channelId, "Notice", NotificationManager.IMPORTANCE_DEFAULT)
             notificationManager.createNotificationChannel(channel)
         }
-
         // 알림 생성
         notificationManager.notify(uniId, notificationBuilder.build())
     }

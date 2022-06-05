@@ -6,18 +6,17 @@ import android.os.Bundle
 import android.content.Intent
 import android.os.Handler
 import android.view.View
-import android.view.WindowManager
-import kotlinx.android.synthetic.main.activity_main.*
+import android.view.WindowManager.LayoutParams.*
 
 
 class SplashActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        window.setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN)
+        window.setFlags(FLAG_FULLSCREEN, FLAG_FULLSCREEN)
         setContentView(R.layout.activity_splash)
 
         val handler = Handler()
-        handler.postDelayed(Runnable {
+        handler.postDelayed({
             val view = findViewById<View>(R.id.view)
             val option = ActivityOptions.makeSceneTransitionAnimation(
                 this,view,"temp"
